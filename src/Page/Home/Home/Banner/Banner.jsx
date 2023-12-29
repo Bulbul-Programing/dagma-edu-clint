@@ -5,7 +5,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 
 const Banner = () => {
     return (
-        <div className='my-10'>
+        <div>
             <Swiper
                 spaceBetween={30}
                 pagination={{

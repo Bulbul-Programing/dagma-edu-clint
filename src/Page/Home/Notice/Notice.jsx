@@ -2,12 +2,10 @@ import Marquee from "react-fast-marquee";
 
 const Notice = () => {
     return (
-        <div>
+        <div className="bg-slate-200 my-5 mx-10 rounded-lg flex">
+            <button className="btn  bg-blue-400 hover:text-slate-600 text-white font-bold">All Notice</button>
             <Marquee>
-               <h1>bulbul</h1>
-               <h1>bulbul</h1>
-               <h1>bulbul</h1>
-               <h1>bulbul</h1>
+               <h1 className="text-lg">DAGMA</h1>
             </Marquee>
         </div>
     );
