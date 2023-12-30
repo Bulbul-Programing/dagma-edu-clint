@@ -25,7 +25,7 @@ const PrincipalTalk = () => {
                     transition={{ duration: 1 }}
                 >
                 <div className="flex md:justify-end lg:justify-center">
-                    <img className=" w-[250px] md:w-[250px] lg:w-[300px] mask mask-hexagon" src="https://i.ibb.co/kSV1TjG/New-Project-5.jpg" alt="" />
+                    <img className=" w-[250px] md:w-[250px] lg:w-[300px] mask mask-hexagon" src="https://i.ibb.co/SQQB6x0/New-Project-8.jpg" alt="" />
                 </div></motion.div>
             </div>
         </div>

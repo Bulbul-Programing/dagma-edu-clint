@@ -7,7 +7,7 @@ const Footer = () => {
                 <h1 className="text-xl font-bold">Duaria A.G Model Academy</h1>
             </aside>
             <nav>
-                <header className="footer-title">Company</header>
+                <header className="footer-title"></header>
                 <a className="link link-hover">About us</a>
                 <a className="link link-hover">Contact</a>
                 <a className="link link-hover">Jobs</a>
