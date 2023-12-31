@@ -2,10 +2,11 @@ import { Link, NavLink } from "react-router-dom";
 import './navbar.css'
 import { useContext } from "react";
 import { AuthContext } from "../../Component/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const Navbar = () => {
-    const { user, loading } = useContext(AuthContext)
+    const { user, loading, logOut,emailLogin } = useContext(AuthContext)
     const navItem = <>
         <NavLink className='mr-2 text-lg font-bold py-2 px-3' to='/'>Home</NavLink>
         <NavLink className='mr-2 text-lg font-bold py-2 px-3' to='academy'>Our Academy</NavLink>
@@ -17,6 +18,19 @@ const Navbar = () => {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
     console.log(user);
+    const handleLogOut = () =>{
+        logOut()
+        .then(()=>{
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Log Out Success",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        })
+    }
+
     return (
         <div className="navbar px-10 bg-transparent shadow-xl">
             <div className="navbar-start">
@@ -40,12 +54,16 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 <div className="flex items-center gap-x-3">
-                    <p>{user.displayName}</p>
-                    <img className="w-[40px] h-[40px] rounded-full" src={user.photoURL} alt="" />
+                    <p>{user?.displayName}</p>
+                    <div>
+                        {
+                            user ? <img className="w-[40px] h-[40px] rounded-full" src={user?.photoURL} alt="" /> : ''
+                        }
+                    </div>
                 </div>
                 <div className="ml-3">
                     {
-                        user ? <button className="btn bg-blue-500 text-white font-bold hover:text-black">Log out</button> : <Link to='/login'><button className="btn bg-blue-500 text-white font-bold hover:text-black">Login</button></Link>
+                        user ? <button onClick={handleLogOut} className="btn bg-blue-500 text-white font-bold hover:text-black">Log out</button> : <Link to='/login'><button className="btn bg-blue-500 text-white font-bold hover:text-black">Login</button></Link>
                     }
                 </div>
             </div>

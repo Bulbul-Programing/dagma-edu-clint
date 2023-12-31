@@ -11,7 +11,7 @@ const imageHostingKey = import.meta.env.VITE_HOSTING_KEY
 const imageHosting = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
 const Register = () => {
     const axiosPublic = useAxiosPublic()
-    const { emailRegister, userUpdateProfile, user } = useContext(AuthContext)
+    const { emailRegister, userUpdateProfile, user, emailVerification } = useContext(AuthContext)
     const [error, setError] = useState('')
     const Navigate = useNavigate()
     const {
@@ -50,11 +50,15 @@ const Register = () => {
                                 Swal.fire({
                                     position: "top-end",
                                     icon: "success",
-                                    title: "Success fully Register",
+                                    title: "Successfully Register",
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
-                                Navigate('/')
+                                emailVerification()
+                                .then(()=>{
+                                    console.log('verification mail send');
+                                })
+                                Navigate('/emailVerify')
                             })
                     }
                 })
@@ -75,7 +79,7 @@ const Register = () => {
 
 
     return (
-        <div className="flex justify-between items-center m-20">
+        <div className="flex justify-between items-center m-5 md:m-10 lg:m-20">
             <div className="w-[450px] shadow-xl px-5 py-10 rounded-2xl">
                 <h1 className="text-2xl font-bold my-5 text-center">Please Register</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -98,7 +102,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-1/2">
+            <div className="w-1/2 hidden md:block lg:block">
                 <img className="md:w-[350px] lg:w-[600px]" src="https://i.ibb.co/HhHfR8J/5165290.jpg" alt="" />
             </div>
         </div>

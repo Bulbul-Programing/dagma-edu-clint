@@ -6,6 +6,8 @@ import Home from "./Page/Home/Home/Home";
 import OurAcademy from "./Page/OurAcademy/OurAcademy/OurAcademy";
 import Login from "./Page/Login/Login";
 import Register from "./Page/Register/Register";
+import EmailVerify from "./Component/EmailVerify/EmailVerify";
+import ChangePassword from "./Component/ChangePassword/ChangePassword";
 
   const router = createBrowserRouter([
     {
@@ -29,6 +31,14 @@ import Register from "./Page/Register/Register";
     {
       path: '/register',
       element: <Register></Register>
+    },
+    {
+      path:'/emailVerify',
+      element: <EmailVerify></EmailVerify>
+    },
+    {
+      path : '/changePassword',
+      element: <ChangePassword></ChangePassword>
     }
   ]);
 
