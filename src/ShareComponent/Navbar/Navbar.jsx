@@ -17,7 +17,8 @@ const Navbar = () => {
     if (loading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
-    console.log(user);
+    
+    
     const handleLogOut = () =>{
         logOut()
         .then(()=>{

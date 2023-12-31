@@ -79,8 +79,8 @@ const Register = () => {
 
 
     return (
-        <div className="flex justify-between items-center m-5 md:m-10 lg:m-20">
-            <div className="w-[450px] shadow-xl px-5 py-10 rounded-2xl">
+        <div className="flex gap-x-5 justify-between items-center m-10 md:m-10 lg:m-20">
+            <div className="md:w-[370px] lg:w-[450px] shadow-2xl p-5 rounded-2xl">
                 <h1 className="text-2xl font-bold my-5 text-center">Please Register</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {errors.name && <span className="text-red-400">This field is required</span>}
@@ -103,7 +103,7 @@ const Register = () => {
                 </div>
             </div>
             <div className="w-1/2 hidden md:block lg:block">
-                <img className="md:w-[350px] lg:w-[600px]" src="https://i.ibb.co/HhHfR8J/5165290.jpg" alt="" />
+                <img src="https://i.ibb.co/HhHfR8J/5165290.jpg" alt="" />
             </div>
         </div>
     );

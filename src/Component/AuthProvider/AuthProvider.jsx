@@ -16,8 +16,8 @@ const AuthProvider = ({ children }) => {
 
     const userUpdateProfile = (name, image) => {
         setLoading(true)
-        return updateProfile(auth.currentUser,{
-            displayName : name, photoURL : image
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: image
         })
     }
 
@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const resetPassword = (email) => {
-        return sendPasswordResetEmail(auth,email)
+        return sendPasswordResetEmail(auth, email)
     }
 
     useEffect(() => {

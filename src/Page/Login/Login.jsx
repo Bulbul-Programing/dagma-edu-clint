@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 const Login = () => {
-    const { emailLogin, resetPassword } = useContext(AuthContext)
+    const { emailLogin } = useContext(AuthContext)
     const navigate = useNavigate()
 
 
@@ -35,11 +35,11 @@ const Login = () => {
     }
 
     return (
-        <div className="flex gap-x-5 gap-y-10 flex-col-reverse md:flex-row-reverse lg:flex-row-reverse justify-between items-center">
-            <div className="w-full lg:w-1/2">
-                <img className="md:w-[350px] lg:w-[500px]" src="https://i.ibb.co/6bL83HL/20547283-6310507.jpg" alt="" />
+        <div className="flex p-10 lg:p-20 gap-y-10  md:flex-row lg:flex-row justify-between items-center">
+            <div className="w-full md:w-1/2 lg:w-1/2 hidden md:block lg:block">
+                <img src="https://i.ibb.co/6bL83HL/20547283-6310507.jpg" alt="" />
             </div>
-            <div className="w-[450px] shadow-2xl p-10 rounded-3xl bg-cover bg-opacity-80 bg-[url('https://i.ibb.co/6bL83HL/20547283-6310507.jpg')]">
+            <div className="md:w-[370px] bg-[url('https://i.ibb.co/VVgHWbb/New-Project-8.jpg')] lg:w-[450px] shadow-2xl p-5 md:p-5 lg:p-10 rounded-3xl bg-cover bg-opacity-10 bg-[url('https://i.ibb.co/6bL83HL/20547283-6310507.jpg') md:bg-none lg:bg-none]">
                 <h1 className="text-3xl font-bold text-center">Please Login</h1>
                 <form onSubmit={handleLogin}>
                     <div className="form-control">
