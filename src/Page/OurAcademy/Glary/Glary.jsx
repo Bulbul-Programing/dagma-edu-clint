@@ -1,56 +1,89 @@
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import axios from "axios";
-import { useState } from "react";
-import LightGallery from 'lightgallery/react';
-import lgThumbnail from 'lightgallery/plugins/thumbnail';
-import lgZoom from 'lightgallery/plugins/zoom';
-import 'lightgallery/css/lightgallery.css';
-import 'lightgallery/css/lg-zoom.css';
-import 'lightgallery/css/lg-thumbnail.css';
+import { memo, useState } from "react";
 
-const imageHostingKey = import.meta.env.VITE_HOSTING_KEY
-const imageHosting = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
+import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+
+
 const Glary = () => {
-    const [images, setImages] = useState([]);
-    const [uploadedImages, setUploadedImages] = useState([]);
+    const [files, setFiles] = useState([]);
+    const [title, setTitle] = useState('')
     const [loading, setLoading] = useState(false)
-
-    const handleImageChange = (e) => {
-        const selectedImages = Array.from(e.target.files);
-        setImages(selectedImages);
+    const axiosPublic = useAxiosPublic()
+    const handleFileChange = (event) => {
+        setFiles([...files, ...event.target.files]);
     };
+
+    const imageHostingKey = import.meta.env.VITE_HOSTING_KEY
+    const imageHosting = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
+
+    const { data: memorys, isLoading: dataLoading, refetch } = useQuery({
+        queryKey: ['allMemory'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/allMemorys')
+            return res.data
+        }
+    })
+
+
 
     const handleUpload = async (e) => {
         e.preventDefault()
+
+        console.log(e.target.title.value);
         setLoading(true)
-        const uploadPromises = images.map(async (image) => {
-            const formData = new FormData();
-            formData.append('image', image);
+        try {
+            const promises = files.map(async (file) => {
+                const formData = new FormData();
+                formData.append('image', file);
 
-            try {
-                const response = await axios.post(`https://api.imgbb.com/1/upload?key=e81c07b7b12d825ec8a0650fb4781041`, formData);
-                setUploadedImages((prevImages) => [...prevImages, response.data.data.url]);
-                setLoading(false)
-            } catch (error) {
-                console.error('Error uploading image:', error);
-            }
-        });
-        await Promise.all(uploadPromises);
+                const response = await axios.post(imageHosting, formData, {
+                    params: {
+                        key: 'e81c07b7b12d825ec8a0650fb4781041', // Replace with your ImgBB API key
+                    },
+                });
 
-        console.log(object);
+                return response.data.data.url;
+            });
+
+            const uploadedImageUrls = await Promise.all(promises);
+
+            console.log('Uploaded Image URLs:', uploadedImageUrls);
+
+            const memoryData = { title: e.target.title.value, image: uploadedImageUrls }
+
+            await axiosPublic.post('/addMemory', memoryData)
+                .then(res => {
+                    if (res.data.insertedId) {
+                        e.target.reset()
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Memory add successfully",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        setTitle('')
+                        setLoading(false)
+                        setFiles([])
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        } catch (error) {
+            console.error('Error uploading images:', error);
+        }
     };
 
-    if (images.length === uploadedImages.length) {
-        console.log(uploadedImages);
+    
+
+    if (dataLoading) {
+        return <div className="flex justify-center my-20"><span className="loading loading-dots loading-lg"></span></div>
     }
-
-    //todo: if user role is teacher then he add memory
-
-    const onBeforeSlide = (detail) => {
-        const { index, prevIndex } = detail;
-        console.log(index, prevIndex);
-    };
 
     return (
         <div className="mx-5 md:mx-10 lg:mx-20">
@@ -59,11 +92,11 @@ const Glary = () => {
                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box">
                         <form onSubmit={handleUpload}>
-                            <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" type="text" placeholder="Memory Title" /> <br />
-                            <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" onChange={handleImageChange} type="file" multiple />
+                            <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" type="text" name="title" placeholder="Memory Title" required /> <br />
+                            <input className="pr-4 w-full mb-6 outline-none  border-2 focus:border-blue-400 rounded-lg text-slate-500 file-input file-input-bordered " onChange={handleFileChange} type="file" multiple />
                             <div>
                                 {
-                                    loading ? <input className='btn bg-blue-500 w-full text-center text-white hover:text-black' disabled type="submit" value="ADD" /> : <input className='btn bg-blue-500 w-full text-center text-white hover:text-black' type="submit" value="ADD" />
+                                    loading === true || files.length === 0 ? <input className='btn bg-blue-500 w-full text-center text-white hover:text-black' disabled type="submit" value="ADD" /> : <input className='btn bg-blue-500 w-full text-center text-white hover:text-black' type="submit" value="ADD" />
                                 }
                             </div>
                         </form>
@@ -75,36 +108,17 @@ const Glary = () => {
                     </div>
                 </dialog>
             </div>
-            <div >
-                <LightGallery
-                    speed={500}
-                    plugins={[lgThumbnail, lgZoom,]}
-                    elementClassNames="custom-wrapper-class"
-                    onBeforeSlide={onBeforeSlide}
-                    mode="lg-fade"
-                >
-                    <a data-lg-size="1406-1390"
-                        className="gallery-item " download={true} href="https://i.ibb.co/F8wYXdF/IMG20230820173126.jpg">
-                        <img className="img-responsive max-w-[600px] md:max-w-[330px] lg:max-w-[400px] h-[130px] md:h-[185px] lg:h-[260px] inline m-2 rounded-lg md:rounded-xl lg:rounded-2xl" src="https://i.ibb.co/F8wYXdF/IMG20230820173126.jpg" />
-                    </a>
-                    <a data-lg-size="1406-1390"
-                        className="gallery-item " href="https://i.ibb.co/nD2kxVQ/IMG-20230224-162543.jpg">
-                        <img className="img-responsive max-w-[600px] md:max-w-[330px] lg:max-w-[400px] h-[130px] md:h-[185px] lg:h-[260px] inline m-2 rounded-lg md:rounded-xl lg:rounded-2xl" src="https://i.ibb.co/nD2kxVQ/IMG-20230224-162543.jpg" />
-                    </a>
-                    <a data-lg-size="1406-1390"
-                        className="gallery-item " href="https://i.ibb.co/RCsdGKF/Firefly-20231229145123-1.png">
-                        <img className="img-responsive max-w-[600px] md:max-w-[330px] lg:max-w-[400px] h-[130px] md:h-[185px] lg:h-[260px] inline m-2 rounded-lg md:rounded-xl lg:rounded-2xl" src="https://i.ibb.co/RCsdGKF/Firefly-20231229145123-1.png" />
-                    </a>
-                    <a data-lg-size="1406-1390"
-                        className="gallery-item " href="https://i.ibb.co/RCsdGKF/Firefly-20231229145123-1.png">
-                        <img className="img-responsive max-w-[600px] md:max-w-[330px] lg:max-w-[400px] h-[130px] md:h-[185px] lg:h-[260px] inline m-2 rounded-lg md:rounded-xl lg:rounded-2xl" src="https://i.ibb.co/RCsdGKF/Firefly-20231229145123-1.png" />
-                    </a>
-                    <a data-lg-size="1406-1390"
-                        className="gallery-item " href="https://i.ibb.co/RCsdGKF/Firefly-20231229145123-1.png">
-                        <img className="img-responsive max-w-[600px] md:max-w-[330px] lg:max-w-[400px] h-[130px] md:h-[185px] lg:h-[260px] inline m-2 rounded-lg md:rounded-xl lg:rounded-2xl" src="https://i.ibb.co/RCsdGKF/Firefly-20231229145123-1.png" />
-                    </a>
-
-                </LightGallery>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {
+                    memorys.map(memory => <Link to={`/showMemoryDetails/${memory._id}`} key={memory._id}>
+                        <div className="shadow-xl h-[230px] cursor-pointer p-4 rounded-xl">
+                            <div>
+                                <img className="w-full rounded-lg" src={memory.image[0]} alt="" />
+                            </div>
+                            <p className="text-lg font-bold my-2">{memory.title.length > 40 ? memory.title.slice(0,39) : memory.title}{memory.title.length > 40 ? '...': ''}</p>
+                        </div>
+                    </Link>)
+                }
             </div>
         </div>
     );

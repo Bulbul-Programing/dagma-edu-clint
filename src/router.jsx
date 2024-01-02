@@ -8,6 +8,7 @@ import Login from "./Page/Login/Login";
 import Register from "./Page/Register/Register";
 import EmailVerify from "./Component/EmailVerify/EmailVerify";
 import ChangePassword from "./Component/ChangePassword/ChangePassword";
+import MemoryDetails from "./Component/MemoryDetails/MemoryDetails";
 
   const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ import ChangePassword from "./Component/ChangePassword/ChangePassword";
         {
           path: '/academy',
           element : <OurAcademy></OurAcademy>
+        },
+        {
+          path: '/showMemoryDetails/:id',
+          element: <MemoryDetails></MemoryDetails>
         }
       ]
     },
