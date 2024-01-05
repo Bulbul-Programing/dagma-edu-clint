@@ -11,7 +11,7 @@ const imageHostingKey = import.meta.env.VITE_HOSTING_KEY
 const imageHosting = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
 const Register = () => {
     const axiosPublic = useAxiosPublic()
-    const { emailRegister, userUpdateProfile, user, emailVerification } = useContext(AuthContext)
+    const { emailRegister, userUpdateProfile, user, emailVerification, googleLogin } = useContext(AuthContext)
     const [error, setError] = useState('')
     const Navigate = useNavigate()
     const {
@@ -55,9 +55,9 @@ const Register = () => {
                                     timer: 1500
                                 })
                                 emailVerification()
-                                .then(()=>{
-                                    console.log('verification mail send');
-                                })
+                                    .then(() => {
+                                        console.log('verification mail send');
+                                    })
                                 Navigate('/emailVerify')
                             })
                     }
@@ -74,7 +74,20 @@ const Register = () => {
     };
 
     const handleGoogleLogin = () => {
-
+        googleLogin()
+            .then(res => {
+                if (res.user.accessToken) {
+                    setError('')
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Successfully Register",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    Navigate('/')
+                }
+            })
     }
 
 

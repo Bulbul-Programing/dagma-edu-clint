@@ -6,6 +6,7 @@ import { memo, useState } from "react";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import Teachers from "../Teachers/Teachers";
 
 
 const Glary = () => {
@@ -20,7 +21,7 @@ const Glary = () => {
     const imageHostingKey = import.meta.env.VITE_HOSTING_KEY
     const imageHosting = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
 
-    const { data: memorys, isLoading: dataLoading, refetch } = useQuery({
+    const { data: memorys, isLoading:dataLoading, refetch } = useQuery({
         queryKey: ['allMemory'],
         queryFn: async () => {
             const res = await axiosPublic.get('/allMemorys')
@@ -84,7 +85,7 @@ const Glary = () => {
     if (dataLoading) {
         return <div className="flex justify-center my-20"><span className="loading loading-dots loading-lg"></span></div>
     }
-
+    
     return (
         <div className="mx-5 md:mx-10 lg:mx-20">
             <div className="my-5 md:my-10 lg:my-10">

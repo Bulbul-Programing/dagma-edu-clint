@@ -9,6 +9,7 @@ import Register from "./Page/Register/Register";
 import EmailVerify from "./Component/EmailVerify/EmailVerify";
 import ChangePassword from "./Component/ChangePassword/ChangePassword";
 import MemoryDetails from "./Component/MemoryDetails/MemoryDetails";
+import Dashboard from "./Component/Dashboard/Dashboard";
 
   const router = createBrowserRouter([
     {
@@ -26,6 +27,11 @@ import MemoryDetails from "./Component/MemoryDetails/MemoryDetails";
         {
           path: '/showMemoryDetails/:id',
           element: <MemoryDetails></MemoryDetails>
+        },
+        {
+          path : '/dashboard',
+          element: <Dashboard></Dashboard>
+          
         }
       ]
     },

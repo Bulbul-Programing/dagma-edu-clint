@@ -46,7 +46,7 @@ const MemoryDetails = () => {
                         memoryData?.image.map((singleImage, index) => 
                         <a data-lg-size="1406-1390" key={index}
                             className="gallery-item " download={true} href={singleImage}>
-                            <img className="img-responsive max-w-[170px] md:max-w-[0px] lg:max-w-[300px] h-[100px] md:h-[150px] lg:h-[200px] inline m-2 md:m-2 lg:m-3 rounded-lg md:rounded-xl lg:rounded-2xl" src={singleImage} />
+                            <img className="img-responsive max-w-[170px] md:max-w-[200px] lg:max-w-[300px] h-[100px] md:h-[150px] lg:h-[200px] inline m-2 md:m-2 lg:m-3 rounded-lg md:rounded-xl lg:rounded-2xl" src={singleImage} />
                         </a>)
                     }
                 </LightGallery>

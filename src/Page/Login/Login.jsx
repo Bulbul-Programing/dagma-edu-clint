@@ -6,8 +6,8 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 const Login = () => {
-    const { emailLogin } = useContext(AuthContext)
-    const navigate = useNavigate()
+    const { emailLogin, googleLogin } = useContext(AuthContext)
+    const Navigate = useNavigate()
 
 
     const handleLogin = (e) => {
@@ -25,13 +25,23 @@ const Login = () => {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    navigate('/')
+                    Navigate('/')
                 }
             })
     }
 
     const handleGoogleLogin = () => {
-        console.log('google login');
+        googleLogin()
+            .then(res => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully Register",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                Navigate('/')
+            })
     }
 
     return (

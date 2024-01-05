@@ -1,22 +1,33 @@
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 const Teachers = () => {
     const imageHostingKey = import.meta.env.VITE_HOSTING_KEY
     const imageHosting = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
     const axiosPublic = useAxiosPublic()
 
+    const { data: teachers, isLoading, refetch } = useQuery({
+        queryKey: ['teachers'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/allTeachers')
+            return res.data
+        }
+
+    })
+
     const {
         register,
         handleSubmit,
-        watch,
+        reset,
         formState: { errors },
     } = useForm()
 
 
     const onSubmit = async (data) => {
-
         const imageFile = { image: data.image[0] }
         const res = await axiosPublic.post(imageHosting, imageFile, {
             headers: {
@@ -30,10 +41,31 @@ const Teachers = () => {
         const subject = data.subject
         const number = data.number
         const photo = imageURL
-        const teacherProfile = { name, subject,number, photo }
-        console.log(teacherProfile);
+        const teacherProfile = { name, subject, number, photo }
+
+        axiosPublic.post('/addTeacher', teacherProfile)
+            .then(res => {
+                if (res.data.insertedId) {
+                    reset()
+                    refetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Teacher add successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
+    if (isLoading) {
+        return <div className="flex justify-center my-20"><span className="loading loading-dots loading-lg"></span></div>
+    }
+    console.log(teachers);
     return (
         <div className="m-10">
             <div className="my-5 md:my-10 lg:my-10">
@@ -60,30 +92,15 @@ const Teachers = () => {
                 </dialog>
             </div>
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                <div className="shadow-2xl p-5 text-center space-y-1 rounded-2xl ">
-                    <img className="w-[100px] h-[100px] md:w-[150px] lg:w-[200px] md:h-[150px] lg:h-[200px] mx-auto rounded-full" src="https://i.ibb.co/mTr7zST/joseph-gonzalez-i-Fg-Rcq-Hznqg-unsplash.jpg" alt="" />
-                    <h1 className="text-xl font-bold">Md. Proshanto Roy</h1>
-                    <p className="text-slate-600 font-medium">Lecturer in ICT</p>
-                    <p className="text-slate-600 font-medium">01728457040</p>
-                </div>
-                <div className="shadow-2xl p-5 text-center space-y-1 rounded-2xl ">
-                    <img className="w-[100px] h-[100px] md:w-[150px] lg:w-[200px] md:h-[150px] lg:h-[200px] mx-auto rounded-full" src="https://i.ibb.co/mTr7zST/joseph-gonzalez-i-Fg-Rcq-Hznqg-unsplash.jpg" alt="" />
-                    <h1 className="text-xl font-bold">Md. Proshanto Roy</h1>
-                    <p className="text-slate-600 font-medium">Lecturer in ICT</p>
-                    <p className="text-slate-600 font-medium">01728457040</p>
-                </div>
-                <div className="shadow-2xl p-5 text-center space-y-1 rounded-2xl ">
-                    <img className="w-[100px] h-[100px] md:w-[150px] lg:w-[200px] md:h-[150px] lg:h-[200px] mx-auto rounded-full" src="https://i.ibb.co/mTr7zST/joseph-gonzalez-i-Fg-Rcq-Hznqg-unsplash.jpg" alt="" />
-                    <h1 className="text-xl font-bold">Md. Proshanto Roy</h1>
-                    <p className="text-slate-600 font-medium">Lecturer in ICT</p>
-                    <p className="text-slate-600 font-medium">01728457040</p>
-                </div>
-                <div className="shadow-2xl p-5 text-center space-y-1 rounded-2xl ">
-                    <img className="w-[100px] h-[100px] md:w-[150px] lg:w-[200px] md:h-[150px] lg:h-[200px] mx-auto rounded-full" src="https://i.ibb.co/mTr7zST/joseph-gonzalez-i-Fg-Rcq-Hznqg-unsplash.jpg" alt="" />
-                    <h1 className="text-xl font-bold">Md. Proshanto Roy</h1>
-                    <p className="text-slate-600 font-medium">Lecturer in ICT</p>
-                    <p className="text-slate-600 font-medium">01728457040</p>
-                </div>
+                {
+                    teachers.map(teacher => <div className="shadow-2xl p-5 text-center space-y-1 rounded-2xl ">
+                        <img className="w-[100px] border-2 h-[100px] md:w-[150px] lg:w-[200px] md:h-[150px] lg:h-[200px] mx-auto rounded-full" src={teacher.photo} alt="" />
+                        <h1 className="text-xl font-bold">{teacher.name}</h1>
+                        <p className="text-slate-600 font-medium">{teacher.subject}</p>
+                        <p className="text-slate-600 font-medium">{teacher.number}</p>
+                    </div>)
+                }
+                
             </div>
         </div>
 
