@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Component/AuthProvider/AuthProvider";
@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 const Login = () => {
     const { emailLogin, googleLogin } = useContext(AuthContext)
     const Navigate = useNavigate()
-
+    const [error, setError] = useState('')
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -26,7 +26,11 @@ const Login = () => {
                         timer: 1500
                     })
                     Navigate('/')
+                    setError('')
                 }
+            })
+            .catch(error => {
+                setError('Password dose not match')
             })
     }
 
@@ -67,6 +71,7 @@ const Login = () => {
                     <input className='btn bg-blue-500 w-full text-white hover:text-black' type="submit" value="Login" />
                 </form>
                 <div>
+                    <p className="my-3 text-red-500">{error}</p>
                     <Link to='/changePassword'><p className="my-3 text-red-500">Forget password?</p></Link>
                     <p className='mt-3 text-center mb-2'>New hare <Link to='/register' className='text-blue-500 font-bold'>Create a New Account</Link> OR <Link to='/' className="font-bold text-blue-500">Go Home</Link></p>
                     <p className='text-center'>Or Sign in With</p>

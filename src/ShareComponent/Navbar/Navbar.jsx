@@ -9,10 +9,10 @@ const Navbar = () => {
     const { user, loading, logOut, emailLogin } = useContext(AuthContext)
     const navItem = <>
         <NavLink className='mr-2 font-bold py-2 px-3' to='/'>Home</NavLink>
-        <NavLink className='mr-2 font-bold py-2 px-3' to='academy'>Our Academy</NavLink>
-        <NavLink className='mr-2 font-bold py-2 px-3' to='forum'>Forum</NavLink>
-        <NavLink className='mr-2 font-bold py-2 px-3' to='/dashboard'>Dashboard</NavLink>
-        <NavLink className='mr-2 font-bold py-2 px-3' to='contact'>Contact Us</NavLink>
+        <NavLink className='mr-2 font-bold py-2 px-3' to='/academy'>Our Academy</NavLink>
+        <NavLink className='mr-2 font-bold py-2 px-3' to='/forum'>Forum</NavLink>
+        <NavLink className='mr-2 font-bold py-2 px-3' to='/dashboard/home'>Dashboard</NavLink>
+        <NavLink className='mr-2 font-bold py-2 px-3' to='/contact'>Contact Us</NavLink>
     </>
 
     if (loading) {

@@ -15,7 +15,7 @@ const MemoryDetails = () => {
 
     const onBeforeSlide = (detail) => {
         const { index, prevIndex } = detail;
-        
+
     };
 
     const { data: memoryData, isLoading } = useQuery({
@@ -27,14 +27,16 @@ const MemoryDetails = () => {
     })
 
 
-    if (isLoading) {
+    if(isLoading) {
         <div className="flex justify-center my-20"><span className="loading loading-dots loading-lg"></span></div>
     }
 
     return (
         <div>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-5 md:my-10 lg:my-10">{memoryData?.title}</h1>
-            <div className="m-5 md:m-5 lg:m-20">
+            <div className={`bg-[url('https://i.ibb.co/nC3ZqV2/New-Project.jpg')] bg-center bg-no-repeat`}>
+                <h1 className="text-2xl bg-slate-700 bg-opacity-65 text-white md:text-3xl lg:text-4xl font-bold text-center py-5 md:py-10 lg:py-20">{memoryData?.title}</h1>
+            </div>
+            <div className="m-5 md:m-5 lg:m-10">
                 <LightGallery
                     speed={500}
                     plugins={[lgThumbnail, lgZoom,]}
@@ -43,11 +45,11 @@ const MemoryDetails = () => {
                     mode="lg-fade"
                 >
                     {
-                        memoryData?.image.map((singleImage, index) => 
-                        <a data-lg-size="1406-1390" key={index}
-                            className="gallery-item " download={true} href={singleImage}>
-                            <img className="img-responsive max-w-[170px] md:max-w-[200px] lg:max-w-[300px] h-[100px] md:h-[150px] lg:h-[200px] inline m-2 md:m-2 lg:m-3 rounded-lg md:rounded-xl lg:rounded-2xl" src={singleImage} />
-                        </a>)
+                        memoryData?.image.map((singleImage, index) =>
+                            <a data-lg-size="1406-1390" key={index}
+                                className="gallery-item " download={true} href={singleImage}>
+                                <img className="img-responsive max-w-[170px] md:max-w-[200px] lg:max-w-[300px] h-[100px] md:h-[150px] lg:h-[200px] inline m-2 md:m-2 lg:m-3 rounded-lg md:rounded-xl lg:rounded-2xl" src={singleImage} />
+                            </a>)
                     }
                 </LightGallery>
             </div>
@@ -55,4 +57,4 @@ const MemoryDetails = () => {
     );
 };
 
-export default MemoryDetails;21
+export default MemoryDetails; 21
