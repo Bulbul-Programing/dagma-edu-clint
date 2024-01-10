@@ -1,13 +1,8 @@
-import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import Swal from "sweetalert2";
+
 import { useQuery } from "@tanstack/react-query";
 
 const Teachers = () => {
-    const imageHostingKey = import.meta.env.VITE_HOSTING_KEY
-    const imageHosting = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
     const axiosPublic = useAxiosPublic()
 
     const { data: teachers, isLoading, refetch } = useQuery({
@@ -19,48 +14,7 @@ const Teachers = () => {
 
     })
 
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm()
-
-
-    const onSubmit = async (data) => {
-        const imageFile = { image: data.image[0] }
-        const res = await axiosPublic.post(imageHosting, imageFile, {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        },)
-
-        const imageURL = res.data.data.display_url
-
-        const name = data.name
-        const subject = data.subject
-        const number = data.number
-        const photo = imageURL
-        const teacherProfile = { name, subject, number, photo }
-
-        axiosPublic.post('/addTeacher', teacherProfile)
-            .then(res => {
-                if (res.data.insertedId) {
-                    reset()
-                    refetch()
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Teacher add successfully",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
+    
 
     if (isLoading) {
         return <div className="flex justify-center my-20"><span className="loading loading-dots loading-lg"></span></div>

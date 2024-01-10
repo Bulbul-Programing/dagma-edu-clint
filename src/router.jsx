@@ -14,6 +14,7 @@ import DashboardHome from "./Page/Dashboard/DashboardHome/DashboardHome";
 import Notice from "./Page/Home/Notice/Notice";
 import AllTeachers from "./Page/Dashboard/AllTeachers/AllTeachers";
 import AllNotice from "./Page/Dashboard/AllNotice/AllNotice";
+import UpdateTeacher from "./Page/Dashboard/UpdateTeacher/UpdateTeacher";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/notice',
         element: <AllNotice></AllNotice>
+      },
+      {
+        path: '/dashboard/update/teacher/:id',
+        element: <UpdateTeacher></UpdateTeacher>,
       },
     ]
   },
