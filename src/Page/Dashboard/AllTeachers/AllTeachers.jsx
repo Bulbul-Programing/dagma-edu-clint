@@ -68,11 +68,6 @@ const AllTeachers = () => {
 
     }
 
-    const handleUpdate = (e, id) => {
-        e.preventDefault()
-        console.log(id);
-    }
-
     if (isLoading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }

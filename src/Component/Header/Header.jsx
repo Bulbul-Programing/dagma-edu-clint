@@ -43,7 +43,6 @@ const Header = () => {
                         <Link to='/academy'><button className='btn mt-7 md:mt-0 lg:mt-0 bg-blue-500 border-none text-white font-bold hover:bg-blue-400'>Explore Academy</button></Link>
                     </div></motion.div>
             </div>
-            <img className="absolute z-20 wave bottom-0 h-[30px] lg:h-[60px] w-full" src="https://lh3.googleusercontent.com/u/0/drive-viewer/AEYmBYR7egYAsmIqc87WgNw8NP1eLtaRgedntwoLvrbIb4WXrGK-ePo9pBkxlg2OpWfCnykok35ZluEcE0zCs64uowCzAi-2=w1280-h833" alt="" />
         </div>
     );
 };
