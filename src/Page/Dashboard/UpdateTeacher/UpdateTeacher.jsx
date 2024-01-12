@@ -19,7 +19,7 @@ const UpdateTeacher = () => {
 
 
     const { data: teachersInfo, isLoading, refetch } = useQuery({
-        queryKey: ['updateTeacher'],
+        queryKey: [`${id}`],
         queryFn: async() => {
             const res = await axiosSecure.get(`/teacher/${id}`)
             return res.data

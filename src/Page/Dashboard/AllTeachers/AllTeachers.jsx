@@ -69,6 +69,44 @@ const AllTeachers = () => {
 
     }
 
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/teacher/delete/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Teacher delete successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            refetch()
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: "Something is Wrong",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    })
+            }
+        });
+    }
+
+
     if (isLoading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
@@ -131,7 +169,7 @@ const AllTeachers = () => {
                                             </div>
                                             <div>
                                                 <div className="font-bold text-lg">{teacher.name}</div>
-                                                <h1 className="text-slate-600 font-semibold">{teacher?.email}bulbul@gmail.com</h1>
+                                                <h1 className="text-slate-600 font-semibold">{teacher?.email}</h1>
                                                 <p className="text-slate-600 my-1">Phone: <span className="font-bold">{teacher.number}</span> </p>
                                             </div>
                                         </div>
@@ -164,7 +202,7 @@ const AllTeachers = () => {
                                                 </div>
                                             </dialog> */}
                                             <Link to={`/dashboard/update/teacher/${teacher._id}`}><button className="btn bg-blue-500 mr-3 text-white hover:text-black">Update</button></Link>
-                                            <button className="btn bg-red-500 text-white hover:text-black">Delete</button>
+                                            <button onClick={() => handleDelete(teacher._id)} className="btn bg-red-500 text-white hover:text-black">Delete</button>
                                         </div>
                                     </th>
                                 </tr>)
