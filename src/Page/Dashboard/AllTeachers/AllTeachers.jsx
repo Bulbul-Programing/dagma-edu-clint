@@ -44,7 +44,8 @@ const AllTeachers = () => {
         const subject = data.subject
         const number = data.number
         const photo = imageURL
-        const teacherProfile = { name, subject, number, photo }
+        const email = data.email
+        const teacherProfile = { name, subject, number, photo, email }
 
         axiosSecure.post('/addTeacher', teacherProfile)
             .then(res => {
@@ -83,6 +84,8 @@ const AllTeachers = () => {
                             <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" type="text" placeholder="Teacher Name" {...register("name", { require: true })} required /> <br />
                             {errors.subject && <span className="text-red-400">This field is required</span>}
                             <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500 file-input file-input-bordered" type="text" placeholder="What subject does he teach?" {...register("subject", { require: true })} required /> <br />
+                            {errors.email && <span className="text-red-400">This field is required</span>}
+                            <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500 file-input file-input-bordered" type="email" placeholder="Email" {...register("email", { require: true })} required /> <br />
                             {errors.number && <span className="text-red-400">This field is required</span>}
                             <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500 file-input file-input-bordered" type="number" placeholder="Phone Number" {...register("number", { require: true })} required /> <br />
                             {errors.image && <span className="text-red-400">This field is required</span>}

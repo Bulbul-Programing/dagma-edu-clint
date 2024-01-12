@@ -28,9 +28,7 @@ const Glary = () => {
             return res.data
         }
     })
-
-
-
+    
     const handleUpload = async (e) => {
         e.preventDefault()
 
@@ -79,8 +77,6 @@ const Glary = () => {
             console.error('Error uploading images:', error);
         }
     };
-
-    
 
     if (dataLoading) {
         return <div className="flex justify-center my-20"><span className="loading loading-dots loading-lg"></span></div>
