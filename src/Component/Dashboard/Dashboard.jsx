@@ -15,6 +15,7 @@ const Dashboard = () => {
                 <div className="  flex flex-col gap-y-2">
                     <NavLink to='/dashboard/home' className='w-full text-center py-2'>Admin Home</NavLink>
                     <NavLink to='/dashboard/teachers' className='w-ful text-center py-2'>Teachers</NavLink>
+                    <NavLink to='/dashboard/memory' className='w-ful text-center py-2'>Memory</NavLink>
                     <NavLink to='/dashboard/notice' className='w-full text-center py-2'>Notice</NavLink>
                 </div>
                 <div className="divider"></div>

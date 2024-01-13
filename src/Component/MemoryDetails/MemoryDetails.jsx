@@ -33,7 +33,7 @@ const MemoryDetails = () => {
 
     return (
         <div>
-            <div className={`bg-[url('https://i.ibb.co/nC3ZqV2/New-Project.jpg')] bg-center bg-no-repeat`}>
+            <div className={`bg-[url('https://i.ibb.co/K2JXFDp/New-Project.jpg')] bg-center bg-no-repeat`}>
                 <h1 className="text-2xl bg-slate-700 bg-opacity-65 text-white md:text-3xl lg:text-4xl font-bold text-center py-5 md:py-10 lg:py-20">{memoryData?.title}</h1>
             </div>
             <div className="m-5 md:m-5 lg:m-10">

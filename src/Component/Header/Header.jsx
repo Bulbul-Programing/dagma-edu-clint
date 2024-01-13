@@ -43,6 +43,7 @@ const Header = () => {
                         <Link to='/academy'><button className='btn mt-7 md:mt-0 lg:mt-0 bg-blue-500 border-none text-white font-bold hover:bg-blue-400'>Explore Academy</button></Link>
                     </div></motion.div>
             </div>
+            <img className='absolute bottom-0 z-10' src="https://i.ibb.co/jb8wQBD/New-Project-4.png" alt="" />
         </div>
     );
 };
