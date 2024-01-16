@@ -20,8 +20,15 @@ const DashboardHome = () => {
             return res.data
         }
     })
+    const { data: notice, isLoading: noticeLoading } = useQuery({
+        queryKey: ['allNotice'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/all/notice')
+            return res.data
+        }
+    })
 
-    if (isLoading || dataLoading) {
+    if (isLoading || dataLoading || noticeLoading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
 
@@ -41,8 +48,8 @@ const DashboardHome = () => {
             </Link>
             <Link to='/dashboard/notice'>
                 <div className="bg-[#7743DB] min-w-[150px] p-5 rounded-xl font-bold text-white">
-                    <h1 className="text-4xl">{teachers?.length}</h1>
-                    <p className="text-lg font-bold">Glary</p>
+                    <h1 className="text-4xl">{notice?.length}</h1>
+                    <p className="text-lg font-bold">Notice</p>
                 </div>
             </Link>
         </div>

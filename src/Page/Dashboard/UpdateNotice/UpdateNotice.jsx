@@ -5,8 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import moment from 'moment';
 
-const UpdateTeacher = () => {
+
+const UpdateNotice = () => {
     const { id } = useParams()
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure()
@@ -16,13 +18,13 @@ const UpdateTeacher = () => {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const [profile, setProfile] = useState('')
-    const loaderTeacherData = useLoaderData()
+    const noticeInfo = useLoaderData()
     const [error, setError] = useState('')
 
-    const { data: teachersInfo, isLoading, refetch } = useQuery({
+    const { data: f, isLoading, refetch } = useQuery({
         queryKey: [`${id}`],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/teacher/${id}`)
+            const res = await axiosSecure.get(`/singleNotice/${id}`)
             return res.data
         }
     })
@@ -59,26 +61,25 @@ const UpdateTeacher = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = e.target
-        const name = form.name.value
-        const subject = form.subject.value
-        const number = form.number.value
-        const photo = updatedPhoto || teachersInfo.photo
-        const email = form.email.value
+        const title = form.title.value
+        const UpdateDate = moment().format('l')
+        const photo = updatedPhoto
+        const status = 'update'
 
-        const teacherData = { name, subject, number, photo, email }
+        const updateNoticeData = { title, UpdateDate, status, photo: updatedPhoto, date: noticeInfo.date, email: noticeInfo.email }
 
 
-        axiosSecure.put(`/update/teacher/${teachersInfo._id}`, teacherData)
+        axiosSecure.put(`/notice/update/${noticeInfo._id}`, updateNoticeData)
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "Teacher update successfully",
+                        title: "Notice update successfully",
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    navigate('/dashboard/teachers')
+                    navigate('/dashboard/notice')
                     setError('')
                 }
             })
@@ -86,30 +87,27 @@ const UpdateTeacher = () => {
 
     }
 
-    console.log(loaderTeacherData);
-    if (isLoading === true) {
+
+    if (isLoading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
     return (
         <div className='my-10'>
-            <h1 className='text-3xl font-bold text-center'>Update Data About {loaderTeacherData?.name}</h1>
+            <h1 className='text-xl font-bold text-center'>Update {noticeInfo.title}</h1>
             <div className='w-1/2 mx-auto my-10'>
                 {
-                    loading ? <div className="skeleton w-[300px] h-[400px] mx-auto"></div> : <img className='w-[300px] mx-auto rounded-3xl' src={updatedPhoto} alt="" />
+                    loading || isLoading ? <div className="skeleton w-[300px] h-[400px] mx-auto"></div> : <img className='w-[300px] mx-auto rounded-3xl' src={updatedPhoto} alt="" />
                 }
                 {
-                    loading ? '' : updatedPhoto ? '' : <img className='w-[300px] mx-auto rounded-3xl' src={teachersInfo.photo} alt="" />
+                    loading ? '' : updatedPhoto ? '' : <img className='w-[300px] mx-auto rounded-3xl' src={noticeInfo.photo} alt="" />
                 }
-                <p className="text-red-500 font-medium mb-4">{error}</p>
                 <input onChange={handleProfile} id="actual-btn" hidden className="px-4 w-full  outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" type="file" /> <br />
                 {
                     loading ? <span className="loading loading-dots loading- bg-blue-400 px-4 py-2 cursor-pointer text-white font-medium rounded-lg"></span> : <label for="actual-btn" className='bg-blue-400 px-4 py-2 cursor-pointer text-white font-medium rounded-lg'>Change Photo</label>
                 }
+                <p className="text-red-500 font-medium mb-4">{error}</p>
                 <form onSubmit={handleSubmit}>
-                    <input className="px-4 w-full my-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" type="text" defaultValue={loaderTeacherData.name} placeholder="Teacher Name" name='name' required /> <br />
-                    <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500 file-input file-input-bordered" type="text" defaultValue={loaderTeacherData.subject} placeholder="What subject does he teach?" name='subject' required /> <br />
-                    <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500 file-input file-input-bordered" type="email" defaultValue={loaderTeacherData?.email} placeholder="Email" name='email' required /> <br />
-                    <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500 file-input file-input-bordered" type="number" defaultValue={loaderTeacherData.number} placeholder="Phone Number" name='number' required /> <br />
+                    <input className="px-4 w-full my-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" type="text" defaultValue={noticeInfo?.title} placeholder="Title" name='title' required /> <br />
                     {
                         loading ? <button className="btn w-full btn-ghost" disabled><span className="loading loading-spinner loading-md"></span></button> : <input className='btn bg-blue-500 w-full text-white hover:text-black' type="submit" value="Update" />
                     }
@@ -119,4 +117,4 @@ const UpdateTeacher = () => {
     );
 };
 
-export default UpdateTeacher;
+export default UpdateNotice;

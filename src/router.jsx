@@ -1,5 +1,5 @@
 import {
-  createBrowserRouter,
+  createBrowserRouter, useParams,
 } from "react-router-dom";
 import MainRoute from "./MainRoute";
 import Home from "./Page/Home/Home/Home";
@@ -16,6 +16,7 @@ import AllTeachers from "./Page/Dashboard/AllTeachers/AllTeachers";
 import AllNotice from "./Page/Dashboard/AllNotice/AllNotice";
 import UpdateTeacher from "./Page/Dashboard/UpdateTeacher/UpdateTeacher";
 import Memory from "./Page/Dashboard/Memory/Memory";
+import UpdateNotice from "./Page/Dashboard/UpdateNotice/UpdateNotice";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,12 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/update/teacher/:id',
         element: <UpdateTeacher></UpdateTeacher>,
+        loader: ({ params }) => fetch(`http://localhost:5000/teacher/${params.id}`)
+      },
+      {
+        path: '/dashboard/update/notice/:id',
+        element: <UpdateNotice></UpdateNotice>,
+        loader: ({ params }) => fetch(`http://localhost:5000/singleNotice/${params.id}`)
       },
     ]
   },

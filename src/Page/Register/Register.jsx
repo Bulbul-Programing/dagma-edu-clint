@@ -19,6 +19,8 @@ const Register = () => {
         handleSubmit,
         formState: { errors },
     } = useForm()
+    const [imageError, setImageError] = useState('')
+
 
     const onSubmit = async (data) => {
         const imageFile = { image: data.image[0] }
@@ -27,6 +29,10 @@ const Register = () => {
                 'content-type': 'multipart/form-data'
             }
         },)
+            .then()
+            .catch(error => {
+                setImageError('Please try to another Photo')
+            })
 
         const imageURL = res.data.data.display_url
 
@@ -54,6 +60,7 @@ const Register = () => {
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
+                                setImageError('')
                                 emailVerification()
                                     .then(() => {
                                         console.log('verification mail send');
@@ -100,6 +107,7 @@ const Register = () => {
                     <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" type="text" placeholder="Full Name" {...register("name", { require: true })} /> <br />
                     {errors.image && <span className="text-red-400">This field is required</span>}
                     <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" type="file" {...register("image", { require: true })} /> <br />
+                    <p className="text-red-500 font-medium mb-4">{error}</p>
                     {errors.email && <span className="text-red-400">This field is required</span>}
                     <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" type="email" placeholder="Email" {...register("email", { required: true })} /> <br />
                     {errors.password && <span className="text-red-400">This field is required</span>}

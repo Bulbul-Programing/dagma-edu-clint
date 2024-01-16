@@ -27,7 +27,7 @@ const Glary = () => {
                     memorys.map(memory => <Link to={`/showMemoryDetails/${memory._id}`} key={memory._id}>
                         <div className="shadow-xl h-[230px] cursor-pointer p-4 rounded-xl">
                             <div>
-                                <img className="w-full rounded-lg" src={memory.image[0]} alt="" />
+                                <img className="w-full max-h-[150px] rounded-lg" src={memory.image[0]} alt="" />
                             </div>
                             <p className="text-lg font-bold my-2">{memory.title.length > 40 ? memory.title.slice(0,39) : memory.title}{memory.title.length > 40 ? '...': ''}</p>
                         </div>

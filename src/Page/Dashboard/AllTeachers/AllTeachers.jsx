@@ -13,7 +13,7 @@ const AllTeachers = () => {
     const imageHostingKey = import.meta.env.VITE_HOSTING_KEY
     const imageHosting = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
     const [loading, setLoading] = useState(false)
-
+    const [error, setError] = useState('')
     const { data: teachers, isLoading, refetch } = useQuery({
         queryKey: ['dashboardTeachers'],
         queryFn: async () => {
@@ -21,6 +21,7 @@ const AllTeachers = () => {
             return response.data
         }
     })
+    
     const {
         register,
         handleSubmit,
@@ -37,6 +38,11 @@ const AllTeachers = () => {
                 'content-type': 'multipart/form-data'
             }
         },)
+        .then()
+        .catch(error => {
+            setError('Please try to another Photo')
+            setLoading(false)
+        })
 
         const imageURL = res.data.data.display_url
 
@@ -60,6 +66,7 @@ const AllTeachers = () => {
                         timer: 1500
                     });
                     setLoading(false)
+                    setError('')
                 }
             })
             .catch(error => {
@@ -128,13 +135,14 @@ const AllTeachers = () => {
                             <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500 file-input file-input-bordered" type="number" placeholder="Phone Number" {...register("number", { require: true })} required /> <br />
                             {errors.image && <span className="text-red-400">This field is required</span>}
                             <input className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" type="file" {...register("image", { require: true })} required /> <br />
+                            <p className="text-red-500 font-medium mb-4">{error}</p>
                             {
                                 loading ? <button className="btn w-full btn-ghost" disabled><span className="loading loading-spinner loading-md"></span></button> : <input className='btn bg-blue-500 w-full text-white hover:text-black' type="submit" value="Add Teacher" />
                             }
                         </form>
                         <div className="modal-action ">
                             <form method="dialog" className="w-full">
-                                <button className="btn w-full text-white bg-red-500">Cancel</button>
+                                <button onClick={()=>setLoading(false)} className="btn w-full text-white bg-red-500">Cancel</button>
                             </form>
                         </div>
                     </div>
