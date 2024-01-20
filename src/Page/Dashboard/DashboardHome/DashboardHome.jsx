@@ -5,22 +5,22 @@ import { Link } from "react-router-dom";
 
 const DashboardHome = () => {
     const axiosSecure = useAxiosSecure()
-
-    const { data: teachers, isLoading } = useQuery({
+    
+    const { data:teachers, isLoading } = useQuery({
         queryKey: ['dashboardTeachers'],
         queryFn: async () => {
             const response = await axiosSecure.get('/allTeachers')
             return response.data
         }
     })
-    const { data: memorys, isLoading: dataLoading, refetch } = useQuery({
+    const { data:memorys, isLoading: dataLoading, refetch } = useQuery({
         queryKey: ['allMemory'],
         queryFn: async () => {
             const res = await axiosPublic.get('/allMemorys')
             return res.data
         }
     })
-    const { data: notice, isLoading: noticeLoading } = useQuery({
+    const { data:notice, isLoading: noticeLoading } = useQuery({
         queryKey: ['allNotice'],
         queryFn: async () => {
             const res = await axiosPublic.get('/all/notice')

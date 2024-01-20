@@ -15,10 +15,6 @@ const Navbar = () => {
         <NavLink className='mr-2 font-bold py-2 px-3' to='/contact'>Contact Us</NavLink>
     </>
 
-    if (loading) {
-        return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
-    }
-
 
     const handleLogOut = () => {
         logOut()
@@ -32,7 +28,7 @@ const Navbar = () => {
                 })
             })
     }
-
+    
     return (
         <div className="navbar px-5 bg-transparent shadow-xl">
             <div className="navbar-start">
@@ -43,14 +39,14 @@ const Navbar = () => {
                     <div tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                         <div className="block md:hidden lg:hidden">
                             {
-                                user.emailVerified ? <div className="flex flex-col gap-y-3 lg:hidden items-center gap-x-3">
+                                user ? <div className="flex flex-col gap-y-3 lg:hidden items-center gap-x-3">
                                     <p className="font-bold">{user?.displayName}</p>
                                     <div>
                                         {
                                             user ? <img className="w-[50px] h-[50px] mb-3 rounded-full" src={user?.photoURL} alt="" /> : ''
                                         }
                                     </div>
-                                </div> : <p className="font-bold text-red-500">Please Verify Your Email</p>
+                                </div> : ''
                             }
                         </div>
                         <ul className="flex flex-col" >
@@ -71,7 +67,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 <div className="hidden md:block lg:block">
-                    {user.emailVerified ?
+                    {user ?
                         <div className="flex items-center gap-x-3">
                             <p>{user?.displayName}</p>
                             <div>
@@ -79,12 +75,12 @@ const Navbar = () => {
                                     user ? <img className="w-[40px] h-[40px] rounded-full" src={user?.photoURL} alt="" /> : ''
                                 }
                             </div>
-                        </div> : <p className="font-bold text-red-500">Please Verify Your Email</p>
+                        </div> : ''
                     }
                 </div>
                 <div className="ml-3 hidden md:block lg:block">
                     {
-                        user && user.emailVerified ? <button onClick={handleLogOut} className="btn bg-blue-500 text-white font-bold hover:text-black">Log out</button> : <Link to='/login'><button className="btn bg-blue-500 text-white font-bold hover:text-black">Login</button></Link>
+                        user ? <button onClick={handleLogOut} className="btn bg-blue-500 text-white font-bold hover:text-black">Log out</button> : <Link to='/login'><button className="btn bg-blue-500 text-white font-bold hover:text-black">Login</button></Link>
                     }
                 </div>
             </div>

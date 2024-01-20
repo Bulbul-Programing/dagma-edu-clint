@@ -69,13 +69,9 @@ const Register = () => {
                             })
                     }
                 })
-                .catch(error => Swal.fire({
-                    position: "top-end",
-                    icon: "error",
-                    title: "Something is Wrong",
-                    showConfirmButton: false,
-                    timer: 1500
-                }))
+                .catch(error => 
+                    setError('This email have already register.')
+                    )
         }
 
     };
