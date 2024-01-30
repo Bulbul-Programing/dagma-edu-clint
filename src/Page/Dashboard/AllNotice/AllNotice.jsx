@@ -55,7 +55,7 @@ const AllNotice = () => {
         const photo = imageURL
         const email = user.email
         const noticeData = { title, date, photo, email }
-        console.log(noticeData);
+        
 
         axiosSecure.post('/add/notice', noticeData)
             .then(res => {

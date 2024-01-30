@@ -1,17 +1,33 @@
 import { Link, NavLink } from "react-router-dom";
 import './navbar.css'
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Component/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 
 const Navbar = () => {
     const { user, loading, logOut, emailLogin } = useContext(AuthContext)
+    const axiosSecure = useAxiosSecure()
+    const [teacherRole, setTeacherRole] = useState({})
+
+    useEffect(()=>{
+        axiosSecure.get(`/getTeacher/role/${user?.email}`)
+        .then(res=> setTeacherRole(res.data))
+    },[user])
+    
+    if (loading) {
+        return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
+    }
+
     const navItem = <>
         <NavLink className='mr-2 font-bold py-2 px-3' to='/'>Home</NavLink>
         <NavLink className='mr-2 font-bold py-2 px-3' to='/academy'>Our Academy</NavLink>
         <NavLink className='mr-2 font-bold py-2 px-3' to='/forum'>Forum</NavLink>
-        <NavLink className='mr-2 font-bold py-2 px-3' to='/dashboard/home'>Dashboard</NavLink>
+        {
+            teacherRole?.role === 'teacher' && <NavLink className='mr-2 font-bold py-2 px-3' to='/dashboard/home'>Dashboard</NavLink>
+        }
         <NavLink className='mr-2 font-bold py-2 px-3' to='/contact'>Contact Us</NavLink>
     </>
 
@@ -26,9 +42,10 @@ const Navbar = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
+                refetch()
             })
     }
-    
+
     return (
         <div className="navbar px-5 bg-transparent shadow-xl">
             <div className="navbar-start">

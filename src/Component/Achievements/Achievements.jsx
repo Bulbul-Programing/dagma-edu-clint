@@ -38,7 +38,7 @@ const Achievements = () => {
 
 
     return (
-        <div className='bg-cover my-20 bg-[url("https://i.ibb.co/2vy59D6/New-Project.jpg")]'>
+        <div className='bg-cover my-20 bg-center bg-fixed bg-[url("https://i.ibb.co/2vy59D6/New-Project.jpg")]'>
             <div className='px-10 py-20 text-white bg-slate-800 bg-opacity-80'>
                 <h1 className="md:text-2xl lg:text-4xl font-bold text-center">OUR TEACHERS AND STUDENTS ACHIEVEMENTS</h1>
                 <div className=' mt-10 md:mt-20 lg:mt-20 grid grid-cols-1 gap-y-8 md:grid-cols-2 lg:grid-cols-4 justify-between lg:mx-20 lg:gap-x-10 text-center'>

@@ -86,7 +86,6 @@ const UpdateTeacher = () => {
 
     }
 
-    console.log(loaderTeacherData);
     if (isLoading === true) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }

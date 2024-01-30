@@ -17,6 +17,7 @@ import AllNotice from "./Page/Dashboard/AllNotice/AllNotice";
 import UpdateTeacher from "./Page/Dashboard/UpdateTeacher/UpdateTeacher";
 import Memory from "./Page/Dashboard/Memory/Memory";
 import UpdateNotice from "./Page/Dashboard/UpdateNotice/UpdateNotice";
+import Forum from "./Page/Forum/Forum";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
         path: '/showMemoryDetails/:id',
         element: <MemoryDetails></MemoryDetails>
       },
+      {
+        path: '/forum',
+        element: <Forum></Forum>
+      }
     ]
   },
   {

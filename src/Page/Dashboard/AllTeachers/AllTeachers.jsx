@@ -51,7 +51,7 @@ const AllTeachers = () => {
         const number = data.number
         const photo = imageURL
         const email = data.email
-        const teacherProfile = { name, subject, number, photo, email }
+        const teacherProfile = { name, subject, number, photo, email, role:'teacher'}
 
         axiosSecure.post('/addTeacher', teacherProfile)
             .then(res => {

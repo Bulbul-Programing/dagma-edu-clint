@@ -27,8 +27,8 @@ const Notice = () => {
                     <div>
                         {
                             notices.map((notice, index) =>
-                                <a href={notice.photo} className="hover:text-blue-400 transition" target="_blank">
-                                    <div key={notice._id} className="mr-10 mb-3 shadow-md px-2 py-3 rounded-lg">
+                                <a href={notice.photo} key={notice._id} className="hover:text-blue-400 transition" target="_blank">
+                                    <div  className="mr-10 mb-3 shadow-md px-2 py-3 rounded-lg">
                                         <p>{index + 1}. {notice.title.length > 42 ? notice.title.slice(0,42) : notice.title}{notice.title.length > 42 ? '...' : ''}</p>
                                     </div>
                                 </a>

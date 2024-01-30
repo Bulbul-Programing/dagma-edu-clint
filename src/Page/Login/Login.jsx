@@ -4,11 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Component/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
     const { emailLogin, googleLogin } = useContext(AuthContext)
     const Navigate = useNavigate()
     const [error, setError] = useState('')
+    const axiosPublic = useAxiosPublic()
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -37,6 +39,8 @@ const Login = () => {
     const handleGoogleLogin = () => {
         googleLogin()
             .then(res => {
+                const user = { name: res.user.displayName, email: res.user.email }
+                axiosPublic.post(`/add/new/user`, user)
                 Swal.fire({
                     position: "top-end",
                     icon: "success",

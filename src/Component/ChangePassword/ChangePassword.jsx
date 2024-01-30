@@ -11,7 +11,7 @@ const ChangePassword = () => {
     const handleResetPassword = async(e) => {
         e.preventDefault()
         const email = e.target.email.value
-        console.log(email);
+        
        await resetPassword(email)
             .then((res) => {
                 Swal.fire({

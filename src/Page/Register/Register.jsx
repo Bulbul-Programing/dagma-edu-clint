@@ -51,7 +51,7 @@ const Register = () => {
                 .then(res => {
                     if (res.user.accessToken) {
                         userUpdateProfile(data.name, imageURL)
-                            .then(res => {
+                            .then(response => {
                                 setError('')
                                 Swal.fire({
                                     position: "top-end",
@@ -60,18 +60,20 @@ const Register = () => {
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
+                                const user = { name: data.name, email: data.email }
+                                axiosPublic.post(`/add/new/user`, user)
                                 setImageError('')
                                 emailVerification()
                                     .then(() => {
                                         console.log('verification mail send');
                                     })
-                                Navigate('/emailVerify')
+                                Navigate('/')
                             })
                     }
                 })
-                .catch(error => 
+                .catch(error =>
                     setError('This email have already register.')
-                    )
+                )
         }
 
     };
@@ -79,8 +81,11 @@ const Register = () => {
     const handleGoogleLogin = () => {
         googleLogin()
             .then(res => {
+
                 if (res.user.accessToken) {
                     setError('')
+                    const user = { name: res.user.displayName, email: res.user.email }
+                    axiosPublic.post(`/add/new/user`, user)
                     Swal.fire({
                         position: "top-end",
                         icon: "success",

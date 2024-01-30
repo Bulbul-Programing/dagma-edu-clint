@@ -142,7 +142,7 @@ return (
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {
-                memorys.map(memory =>
+                memorys?.map(memory =>
                     <div key={memory._id}>
                         <div className="shadow-xl h-[230px] p-4 rounded-xl">
                             <Link to={`/showMemoryDetails/${memory._id}`}>

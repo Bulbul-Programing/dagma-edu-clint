@@ -5,14 +5,14 @@ import { motion } from 'framer-motion';
 
 const Header = () => {
     return (
-        <div className="relative mb-20 md:mb-16 lg:mb-16">
-            <img className='z-0 lg:h-[600px] w-full' src="https://i.ibb.co/VVgHWbb/New-Project-8.jpg" alt="" />
-            <div className="absolute text-white w-full top-0 z-10 h-full bg-slate-700 bg-opacity-65">
+        <div className="  bg-no-repeat md:mb-16 bg-fixed bg-center bg-auto  bg-[url('https://i.ibb.co/VVgHWbb/New-Project-8.jpg')] lg:mb-16">
+            {/* <img className='z-0 lg:h-[600px] w-full' src="https://i.ibb.co/VVgHWbb/New-Project-8.jpg" alt="" /> */}
+            <div className=" text-white w-full lg:pb-10 h-full bg-slate-700 bg-opacity-65">
                 <motion.div
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
-                ><h1 className='text-2xl my-5 md:text-5xl lg:text-6xl font-bold text-white text-center md:my-10 lg:my-20'>Duaria A.G Model Academy</h1></motion.div>
+                ><h1 className='text-2xl py-5 md:text-5xl lg:text-6xl font-bold text-white text-center md:py-10 lg:py-20'>Duaria A.G Model Academy</h1></motion.div>
                 <motion.div
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ const Header = () => {
                         <Link to='/academy'><button className='btn mt-7 md:mt-0 lg:mt-0 bg-blue-500 border-none text-white font-bold hover:bg-blue-400'>Explore Academy</button></Link>
                     </div></motion.div>
             </div>
-            <img className='absolute bottom-0 z-10 lg:h-[150px] lg:w-full' src="https://i.ibb.co/jb8wQBD/New-Project-4.png" alt="" />
+            <img className=' bottom-0 z-10 lg:h-[150px] lg:w-full bg-slate-700 bg-opacity-65' src="https://i.ibb.co/jb8wQBD/New-Project-4.png" alt="" />
         </div>
     );
 };
