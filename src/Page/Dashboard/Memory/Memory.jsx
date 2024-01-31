@@ -13,6 +13,7 @@ const Memory = () => {
     const [loading, setLoading] = useState(false)
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure()
+   
     const handleFileChange = (event) => {
         setFiles([...files, ...event.target.files]);
     };

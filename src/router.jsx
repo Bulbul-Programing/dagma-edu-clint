@@ -18,6 +18,7 @@ import UpdateTeacher from "./Page/Dashboard/UpdateTeacher/UpdateTeacher";
 import Memory from "./Page/Dashboard/Memory/Memory";
 import UpdateNotice from "./Page/Dashboard/UpdateNotice/UpdateNotice";
 import Forum from "./Page/Forum/Forum";
+import IsAdmin from "./Hooks/isAdmin";
 
 const router = createBrowserRouter([
   {
@@ -64,28 +65,28 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/dashboard/home',
-        element: <DashboardHome></DashboardHome>
+        element: <IsAdmin><DashboardHome></DashboardHome></IsAdmin>
       },
       {
         path: '/dashboard/teachers',
-        element: <AllTeachers></AllTeachers>
+        element: <IsAdmin><AllTeachers></AllTeachers></IsAdmin>
       },
       {
         path: '/dashboard/memory',
-        element: <Memory></Memory>
+        element:<IsAdmin><Memory></Memory></IsAdmin>
       },
       {
         path: '/dashboard/notice',
-        element: <AllNotice></AllNotice>
+        element: <IsAdmin><AllNotice></AllNotice></IsAdmin>
       },
       {
         path: '/dashboard/update/teacher/:id',
-        element: <UpdateTeacher></UpdateTeacher>,
+        element: <IsAdmin><UpdateTeacher></UpdateTeacher></IsAdmin>,
         loader: ({ params }) => fetch(`http://localhost:5000/teacher/${params.id}`)
       },
       {
         path: '/dashboard/update/notice/:id',
-        element: <UpdateNotice></UpdateNotice>,
+        element: <IsAdmin><UpdateNotice></UpdateNotice></IsAdmin>,
         loader: ({ params }) => fetch(`http://localhost:5000/singleNotice/${params.id}`)
       },
     ]

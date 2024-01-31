@@ -1,8 +1,13 @@
+import CreatePost from "./CreatePost/CreatePost";
+import ForumBanner from "./ForumBanner/ForumBanner";
 
 const Forum = () => {
     return (
         <div>
-            <h1>Forum</h1>
+            <ForumBanner></ForumBanner>
+            <div className="md:w-[700px] lg:w-[700px] mx-auto">
+                <CreatePost></CreatePost>
+            </div>
         </div>
     );
 };
