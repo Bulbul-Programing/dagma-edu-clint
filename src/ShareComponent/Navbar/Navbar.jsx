@@ -28,7 +28,7 @@ const Navbar = () => {
         {
             teacherRole?.role === 'teacher' && <NavLink className='mr-2 font-bold py-2 px-3' to='/dashboard/home'>Dashboard</NavLink>
         }
-        <NavLink className='mr-2 font-bold py-2 px-3' to='/contact'>Contact Us</NavLink>
+        <NavLink className='mr-2 font-bold py-2 px-3' to='/mujibCorner'>Mujib Corner</NavLink>
     </>
 
 
@@ -42,7 +42,6 @@ const Navbar = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                refetch()
             })
     }
 

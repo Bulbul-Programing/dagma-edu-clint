@@ -1,26 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const DashboardHome = () => {
     const axiosSecure = useAxiosSecure()
-    
-    const { data:teachers, isLoading } = useQuery({
+    const axiosPublic = useAxiosPublic()
+
+    const { data: teachers, isLoading } = useQuery({
         queryKey: ['dashboardTeachers'],
         queryFn: async () => {
             const response = await axiosSecure.get('/allTeachers')
             return response.data
         }
     })
-    const { data:memorys, isLoading: dataLoading, refetch } = useQuery({
+
+    const { data: memorys, isLoading: dataLoading, refetch } = useQuery({
         queryKey: ['allMemory'],
         queryFn: async () => {
             const res = await axiosPublic.get('/allMemorys')
             return res.data
         }
     })
-    const { data:notice, isLoading: noticeLoading } = useQuery({
+    const { data: notice, isLoading: noticeLoading } = useQuery({
         queryKey: ['allNotice'],
         queryFn: async () => {
             const res = await axiosPublic.get('/all/notice')
@@ -28,9 +31,9 @@ const DashboardHome = () => {
         }
     })
 
-    if (isLoading || dataLoading || noticeLoading) {
-        return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
-    }
+    // if (isLoading || dataLoading || noticeLoading) {
+    //     return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
+    // }
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 m-5 md:m-5 lg:m-20">

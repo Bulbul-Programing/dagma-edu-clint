@@ -19,6 +19,8 @@ import Memory from "./Page/Dashboard/Memory/Memory";
 import UpdateNotice from "./Page/Dashboard/UpdateNotice/UpdateNotice";
 import Forum from "./Page/Forum/Forum";
 import IsAdmin from "./Hooks/isAdmin";
+import IsLogin from "./Hooks/isLogin";
+import MujibCorner from "./Page/MujibCorner/MujibCorner";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +41,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/forum',
-        element: <Forum></Forum>
+        element:<IsLogin><Forum></Forum></IsLogin> 
+      },
+      {
+        path : '/mujibCorner',
+        element : <MujibCorner></MujibCorner>
       }
     ]
   },

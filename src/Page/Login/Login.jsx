@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Component/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -9,6 +9,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Login = () => {
     const { emailLogin, googleLogin } = useContext(AuthContext)
     const Navigate = useNavigate()
+    const location = useLocation()
     const [error, setError] = useState('')
     const axiosPublic = useAxiosPublic()
 
@@ -27,7 +28,7 @@ const Login = () => {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    Navigate('/')
+                    Navigate(location?.state ? location.state : '/')
                     setError('')
                 }
             })
@@ -48,7 +49,7 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                Navigate('/')
+                Navigate(location?.state ? location.state : '/')
             })
     }
 
@@ -77,7 +78,7 @@ const Login = () => {
                 <div>
                     <p className="my-3 text-red-500">{error}</p>
                     <Link to='/changePassword'><p className="my-3 text-red-500">Forget password?</p></Link>
-                    <p className='mt-3 text-center mb-2'>New hare <Link to='/register' className='text-blue-500 font-bold'>Create a New Account</Link> OR <Link to='/' className="font-bold text-blue-500">Go Home</Link></p>
+                    <p className='mt-3 text-center mb-2'>New hare <Link to='/register' state={location?.state ? location.state : ''} className='text-blue-500 font-bold'>Create a New Account</Link> OR <Link to='/' className="font-bold text-blue-500">Go Home</Link></p>
                     <p className='text-center'>Or Sign in With</p>
 
                     <div className='flex justify-center gap-x-4'>

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Component/AuthProvider/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Swal from 'sweetalert2'
@@ -14,6 +14,8 @@ const Register = () => {
     const { emailRegister, userUpdateProfile, user, emailVerification, googleLogin } = useContext(AuthContext)
     const [error, setError] = useState('')
     const Navigate = useNavigate()
+    const location = useLocation()
+
     const {
         register,
         handleSubmit,
@@ -67,7 +69,7 @@ const Register = () => {
                                     .then(() => {
                                         console.log('verification mail send');
                                     })
-                                Navigate('/')
+                                Navigate(location?.state ? location.state : '/')
                             })
                     }
                 })
@@ -93,7 +95,7 @@ const Register = () => {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    Navigate('/')
+                    Navigate(location?.state ? location.state : '/')
                 }
             })
     }

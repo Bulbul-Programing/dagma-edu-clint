@@ -25,7 +25,6 @@ const Banner = () => {
                 <SwiperSlide><img className='h-[250px] md:h-[400px] lg:h-[600px] w-full' src="https://i.ibb.co/gP54Bqm/278264399-456402582903669-6523261682316127415-n.jpg" alt="" /></SwiperSlide>
                 <SwiperSlide><img className='h-[250px] md:h-[400px] lg:h-[600px] w-full' src="https://i.ibb.co/njn8Zfh/278264434-456402859570308-2301887061665505822-n.jpg" alt="" /></SwiperSlide>
                 <SwiperSlide><img className='h-[250px] md:h-[400px] lg:h-[600px] w-full' src="https://i.ibb.co/wJdS26N/278274420-456403082903619-4364089576689820306-n.jpg" alt="" /></SwiperSlide>
-
             </Swiper>
         </div>
     );

@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import moment from "moment";
 
 const Memory = () => {
     const [files, setFiles] = useState([]);
@@ -40,7 +41,7 @@ const Memory = () => {
 
                 const response = await axios.post(imageHosting, formData, {
                     params: {
-                        key: '44282da6dd7e6508bd60f9596190bdc7',
+                        key: imageHostingKey,
                     },
                 });
                 
@@ -48,7 +49,8 @@ const Memory = () => {
             return response.data.data.url;
         });
         const uploadedImageUrls = await Promise.all(promises);
-        const memoryData = { title: e.target.title.value, image: uploadedImageUrls }
+        const date = moment().format('l')
+        const memoryData = { date, title: e.target.title.value, image: uploadedImageUrls }
 
         await axiosPublic.post('/addMemory', memoryData)
             .then(res => {
