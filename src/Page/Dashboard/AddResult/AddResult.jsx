@@ -66,15 +66,47 @@ const AddResult = () => {
             })
     }
 
-    const handleDelete = (id) => {
-
+    const handleDelete = async (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await axiosSecure.delete(`/delete/result/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Result delete successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            refetch()
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: "Something is Wrong",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    })
+            }
+        });
     }
 
     if (isLoading) {
         <div className="flex justify-center my-20"><span className="loading loading-dots loading-lg"></span></div>
     }
 
-    console.log(allResult);
     return (
         <div className="mx-10">
             <h1 className="text-center text-3xl my-10 font-bold">Results</h1>
@@ -149,7 +181,7 @@ const AddResult = () => {
 
                                     <th className="">
                                         <span className="flex justify-center">
-                                            <Link to={`/dashboard/update/result/${result._id}`} reloadData = {'refetch'}><button className="btn bg-blue-500 mr-3 text-white hover:text-black">Update</button></Link>
+                                            <Link to={`/dashboard/update/result/${result._id}`} reloadData={'refetch'}><button className="btn bg-blue-500 mr-3 text-white hover:text-black">Update</button></Link>
                                             <button onClick={() => handleDelete(result._id)} className="btn bg-red-500 text-white hover:text-black">Delete</button>
                                         </span>
                                     </th>
