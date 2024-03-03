@@ -32,7 +32,6 @@ const Memory = () => {
 
     const handleUpload = async (e) => {
         e.preventDefault()
-
         setLoading(true)
         try {
             const promises = files.map(async (file) => {

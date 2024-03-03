@@ -13,8 +13,6 @@ const Glary = () => {
             return res.data
         }
     })
-    
-    
 
     if (dataLoading) {
         return <div className="flex justify-center my-20"><span className="loading loading-dots loading-lg"></span></div>

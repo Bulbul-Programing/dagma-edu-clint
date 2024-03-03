@@ -21,6 +21,9 @@ import Forum from "./Page/Forum/Forum";
 import IsAdmin from "./Hooks/isAdmin";
 import IsLogin from "./Hooks/isLogin";
 import MujibCorner from "./Page/MujibCorner/MujibCorner";
+import Corner from "./Page/Dashboard/Corner/Corner";
+import AddResult from "./Page/Dashboard/AddResult/AddResult";
+import UpdateResult from "./Page/Dashboard/UpdateResult/UpdateResult";
 
 const router = createBrowserRouter([
   {
@@ -41,11 +44,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/forum',
-        element:<IsLogin><Forum></Forum></IsLogin> 
+        element: <IsLogin><Forum></Forum></IsLogin>
       },
       {
-        path : '/mujibCorner',
-        element : <MujibCorner></MujibCorner>
+        path: '/mujibCorner',
+        element: <MujibCorner></MujibCorner>
       }
     ]
   },
@@ -79,11 +82,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/memory',
-        element:<IsAdmin><Memory></Memory></IsAdmin>
+        element: <IsAdmin><Memory></Memory></IsAdmin>
       },
       {
         path: '/dashboard/notice',
         element: <IsAdmin><AllNotice></AllNotice></IsAdmin>
+      },
+      {
+        path: '/dashboard/corner',
+        element: <IsAdmin><Corner></Corner></IsAdmin>
+      },
+      {
+        path: '/dashboard/result',
+        element: <IsAdmin><AddResult></AddResult></IsAdmin>
       },
       {
         path: '/dashboard/update/teacher/:id',
@@ -94,6 +105,11 @@ const router = createBrowserRouter([
         path: '/dashboard/update/notice/:id',
         element: <IsAdmin><UpdateNotice></UpdateNotice></IsAdmin>,
         loader: ({ params }) => fetch(`http://localhost:5000/singleNotice/${params.id}`)
+      },
+      {
+        path: '/dashboard/update/result/:id',
+        element: <IsAdmin><UpdateResult></UpdateResult></IsAdmin>,
+        loader: ({ params }) => fetch(`http://localhost:5000/single/result/${params.id}`)
       },
     ]
   },
