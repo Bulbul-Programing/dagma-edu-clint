@@ -3,7 +3,7 @@ import Header from "../../../Component/Header/Header";
 import PrincipalTalk from "../../../Component/PrincipalTalk/PrincipalTalk";
 import StudentFuture from "../../../Component/StudentFuture/StudentFuture";
 import Notice from "../Notice/Notice";
-// import Banner from "./Banner/Banner";
+import StudentResult from "../StudentResult/StudentResult";
 
 const Home = () => {
     return (
@@ -13,7 +13,7 @@ const Home = () => {
             <PrincipalTalk></PrincipalTalk>
             <StudentFuture></StudentFuture>
             <Achievements></Achievements>
-            {/* <Banner></Banner> */}
+            <StudentResult></StudentResult>
         </div>
     );
 };

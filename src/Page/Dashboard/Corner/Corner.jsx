@@ -114,14 +114,14 @@ const Corner = () => {
                             <input type="text" className="px-4 w-full mb-4 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" name="descriptionTitle" placeholder="Change Description title" id="" required />
                             <textarea name="description" className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" rows="3" placeholder="Description" required></textarea>
 
-                            <div className="modal-action mt-[-10px]">
+                            <span className="modal-action mt-[-10px]">
                                 {
                                     loading ? <button className="btn btn-ghost" disabled><span className="loading loading-spinner loading-md"></span></button> : <input className='btn bg-blue-500 text-white hover:text-black' type="submit" value="Update Corner" />
                                 }
                                 <form method="dialog">
                                     <button className="btn bg-red-500 text-white hover:text-black ml-3">Close</button>
                                 </form>
-                            </div>
+                            </span>
                         </form>
 
                     </div>
