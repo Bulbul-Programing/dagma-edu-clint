@@ -118,6 +118,7 @@ const AddResult = () => {
                         <form onSubmit={handleSubmit} className="mt-5">
                             <input type="text" className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" name="title" placeholder="Result Title" id="" required />
                             <select className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" name="select" id="">
+                                <option value="JSC">JSC</option>
                                 <option value="SSC">SSC</option>
                                 <option value="HSC">HSC</option>
                             </select>

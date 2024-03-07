@@ -24,6 +24,9 @@ import MujibCorner from "./Page/MujibCorner/MujibCorner";
 import Corner from "./Page/Dashboard/Corner/Corner";
 import AddResult from "./Page/Dashboard/AddResult/AddResult";
 import UpdateResult from "./Page/Dashboard/UpdateResult/UpdateResult";
+import TeacherDBHome from "./Page/Dashboard/TeacherDashbord/TeacherDBHome/TeacherDBHome";
+import TeacherDashboard from "./Page/Dashboard/TeacherDashbord/TeacherDashboard";
+import IsTeacher from "./Hooks/IsTeacher";
 
 const router = createBrowserRouter([
   {
@@ -113,6 +116,32 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+    path: 'teacherDB',
+    element: <TeacherDashboard></TeacherDashboard>,
+    children: [
+      {
+        path: '/teacherDB/home',
+        element: <IsTeacher><TeacherDBHome></TeacherDBHome></IsTeacher>
+      },
+      {
+        path: '/teacherDB/allTeacher',
+        element:<IsTeacher><AllTeachers teacherRole='teacher'></AllTeachers></IsTeacher>
+      },
+      {
+        path: '/teacherDB/memory',
+        element: <IsTeacher><Memory></Memory></IsTeacher>
+      },
+      {
+        path: '/teacherDB/notice',
+        element:<IsTeacher><AllNotice></AllNotice></IsTeacher> 
+      },
+      {
+        path: '/teacherDB/result',
+        element: <IsTeacher><AddResult></AddResult></IsTeacher>
+      },
+    ]
+  }
 ]);
 
 export default router

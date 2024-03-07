@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+import { Link } from 'react-router-dom';
 
 
 const StudentResult = () => {
@@ -95,7 +96,7 @@ const StudentResult = () => {
                 </div>
             </div>
             <div className='flex justify-center'>
-                <button className='bg-blue-500 text-lg hover:bg-blue-600 hover:scale-105 hover:delay-75 font-medium px-4 py-2 rounded-lg text-white'>Show all result</button>
+                <Link to='/academy' className='bg-blue-500 text-lg hover:bg-blue-600 hover:scale-105 hover:delay-75 font-medium px-4 py-2 rounded-lg text-white'>Show all result</Link>
             </div>
         </div>
     );

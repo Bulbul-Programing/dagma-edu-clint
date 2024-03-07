@@ -54,9 +54,7 @@ const AllNotice = () => {
         const date = moment().format('l')
         const photo = imageURL
         const email = user.email
-        const noticeData = { title, date, photo, email }
-        
-
+        const noticeData = { title, date, photo, email, status:'pending'}
         axiosSecure.post('/add/notice', noticeData)
             .then(res => {
                 if (res.data.insertedId) {
@@ -65,7 +63,7 @@ const AllNotice = () => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "Teacher add successfully",
+                        title: "Notice add successfully",
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -97,7 +95,7 @@ const AllNotice = () => {
                             Swal.fire({
                                 position: "top-end",
                                 icon: "success",
-                                title: "Teacher delete successfully",
+                                title: "Notice delete successfully",
                                 showConfirmButton: false,
                                 timer: 1500
                             });

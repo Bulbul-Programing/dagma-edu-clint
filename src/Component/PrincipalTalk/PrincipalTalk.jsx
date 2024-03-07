@@ -5,9 +5,20 @@ const PrincipalTalk = () => {
         <div className="flex flex-col-reverse md:flex-row lg:flex-row items-center m-5 md:m-10 lg:m-20 justify-between">
             <div className='md:w-4/6 mr-4 lg:w-1/2'>
                 <motion.div
-                    initial={{ opacity: 0, x: -150 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1 }}
+                    className="card"
+                    initial={{
+                        opacity: 0,
+                        // if odd index card,slide from right instead of left
+                        x: -50
+                    }}
+                    whileInView={{
+                        opacity: 1,
+                        x: 0, // Slide in to its original position
+                        transition: {
+                            duration: 1 // Animation duration
+                        }
+                    }}
+                    viewport={{ once: true }}
                 >
                     <div>
                         <p className="my-2 text-slate-500">Principal Talk</p>
@@ -20,13 +31,24 @@ const PrincipalTalk = () => {
             </div>
             <div className='md:2/6 lg:w-1/2'>
                 <motion.div
-                    initial={{ opacity: 0, x: 150 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1 }}
+                    className="card"
+                    initial={{
+                        opacity: 0,
+                        // if odd index card,slide from right instead of left
+                        x: 50
+                    }}
+                    whileInView={{
+                        opacity: 1,
+                        x: 0, // Slide in to its original position
+                        transition: {
+                            duration: 1 // Animation duration
+                        }
+                    }}
+                    viewport={{ once: true }}
                 >
-                <div className="flex md:justify-end lg:justify-center">
-                    <img className=" w-[250px] md:w-[250px] lg:w-[300px] mask mask-hexagon" src="https://i.ibb.co/SQQB6x0/New-Project-8.jpg" alt="" />
-                </div></motion.div>
+                    <div className="flex md:justify-end lg:justify-center">
+                        <img className=" w-[250px] md:w-[250px] lg:w-[300px] mask mask-hexagon" src="https://i.ibb.co/SQQB6x0/New-Project-8.jpg" alt="" />
+                    </div></motion.div>
             </div>
         </div>
     );

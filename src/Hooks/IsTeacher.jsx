@@ -5,14 +5,14 @@ import useAxiosSecure from "./useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "./useAxiosPublic";
 
-const isAdmin = ({ children }) => {
+const IsTeacher = ({children}) => {
     const { user, loading } = useContext(AuthContext)
     const navigate = useNavigate()
     const [load, setLoad] = useState(false)
     const axiosSecure = useAxiosSecure()
     const axiosPublic = useAxiosPublic()
     const [userInfo, setUserInfo] = useState({})
-    
+
     useEffect(() => {
         const checkAdmin = async () => {
             setLoad(true)
@@ -24,19 +24,19 @@ const isAdmin = ({ children }) => {
         }
         checkAdmin()
     }, [user])
-    
+
 
     if (load || loading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
 
-    if (userInfo?.teacherRole === "Admin") {
+    if (userInfo?.teacherRole === "teacher") {
         return children
     }
-    else{
+    else {
         navigate('/')
     }
 
 };
 
-export default isAdmin;
+export default IsTeacher;

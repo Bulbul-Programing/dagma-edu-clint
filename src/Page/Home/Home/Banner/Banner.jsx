@@ -19,7 +19,7 @@ const Banner = () => {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
     return (
-        <div>
+        <div className='m-5 md:m-10 lg:m-10'>
             <Swiper
                 spaceBetween={30}
                 pagination={{

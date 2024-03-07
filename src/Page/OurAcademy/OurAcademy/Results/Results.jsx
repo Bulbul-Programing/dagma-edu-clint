@@ -13,6 +13,7 @@ const Results = () => {
 
     const handleResult = (section) => {
         setSection(section)
+        setModal(false)
     }
 
     useEffect(() => {
@@ -47,6 +48,7 @@ const Results = () => {
     return (
         <div className="relative">
             <div>
+                <button onClick={() => handleResult('JSC')} className={`px-6 py-3 rounded-lg ml-3 ${section === 'JSC' ? 'bg-blue-500' : 'bg-slate-400'} font-medium text-lg  text-white hover:text-black`}>JSC</button>
                 <button onClick={() => handleResult('SSC')} className={`px-6 py-3 rounded-lg ml-3 ${section === 'SSC' ? 'bg-blue-500' : 'bg-slate-400'} font-medium text-lg  text-white hover:text-black`}>SSC</button>
                 <button onClick={() => handleResult('HSC')} className={`px-6 py-3 rounded-lg ml-3 ${section === 'HSC' ? 'bg-blue-500' : 'bg-slate-400'} font-medium text-lg  text-white hover:text-black`}>HSC</button>
             </div>
@@ -96,7 +98,9 @@ const Results = () => {
                                         <span className="flex justify-center">
 
                                             <button onClick={() => handleModal(index)} className="px-3 py-2 rounded-md text-xs hover:bg-slate-300 bg-blue-500 mr-3 text-white hover:text-black">Chart View</button>
-                                            <button className="px-3 py-2 rounded-md text-xs hover:bg-slate-300 bg-blue-500 text-white hover:text-black">Download</button>
+                                            {
+                                                result.resultPic && <div className="px-3 py-2 rounded-md text-xs hover:bg-slate-300 bg-blue-500 mr-3 text-white hover:text-black"><a href={result.resultPic} target="_blank">download</a></div>
+                                            }
                                         </span>
                                     </th>
                                 </tr>)

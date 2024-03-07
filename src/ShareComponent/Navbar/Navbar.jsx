@@ -10,11 +10,11 @@ import { useQuery } from "@tanstack/react-query";
 const Navbar = () => {
     const { user, loading, logOut, emailLogin } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
-    const [teacherRole, setTeacherRole] = useState({})
-
+    const [teacherInfo, setTeacherInfo] = useState({})
+    
     useEffect(()=>{
         axiosSecure.get(`/getTeacher/role/${user?.email}`)
-        .then(res=> setTeacherRole(res.data))
+        .then(res=> setTeacherInfo(res.data))
     },[user])
     
     if (loading) {
@@ -26,7 +26,10 @@ const Navbar = () => {
         <NavLink className='mr-2 font-bold py-2 px-3' to='/academy'>Our Academy</NavLink>
         <NavLink className='mr-2 font-bold py-2 px-3' to='/forum'>Forum</NavLink>
         {
-            teacherRole?.role === 'teacher' && <NavLink className='mr-2 font-bold py-2 px-3' to='/dashboard/home'>Dashboard</NavLink>
+            teacherInfo?.teacherRole === 'Admin' && <NavLink className='mr-2 font-bold py-2 px-3' to='/dashboard/home'>Dashboard</NavLink>
+        }
+        {
+            teacherInfo?.teacherRole === 'teacher' && <NavLink className='mr-2 font-bold py-2 px-3' to='/teacherDB/home'>Dashboard</NavLink>
         }
         <NavLink className='mr-2 font-bold py-2 px-3' to='/mujibCorner'>Mujib Corner</NavLink>
     </>
