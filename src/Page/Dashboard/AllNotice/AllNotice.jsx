@@ -130,7 +130,7 @@ const AllNotice = () => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "Notice delete successfully",
+                        title: "Notice status update successfully",
                         showConfirmButton: false,
                         timer: 1500
                     });

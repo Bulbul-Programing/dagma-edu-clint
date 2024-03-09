@@ -121,7 +121,7 @@ const AllTeachers = ({ teacherRole }) => {
                 }
             })
     }
-
+    console.log(teachers);
     if (isLoading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
@@ -200,6 +200,9 @@ const AllTeachers = ({ teacherRole }) => {
                                     </td>
                                     <td className="min-w-[150px]">
                                         <h1 className="font-bold">{teacher.subject}</h1>
+                                        {
+                                            teacher.teacherRole === 'Admin' && <h1 className="bg-blue-400 inline-block px-3 py-1 my-1 text-white rounded-md">{teacher.teacherRole}</h1>
+                                        }
                                     </td>
                                     {
                                         teacherRole !== 'teacher' &&

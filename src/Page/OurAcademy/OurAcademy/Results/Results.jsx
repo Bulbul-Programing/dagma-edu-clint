@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 
 
 const Results = () => {
-    const [section, setSection] = useState('SSC')
+    const [section, setSection] = useState('JSC')
     const axiosPublic = useAxiosPublic()
     const [allResult, setAllResult] = useState([])
     const [loading, setLoading] = useState(false)

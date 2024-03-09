@@ -26,8 +26,8 @@ const Teachers = () => {
                 {
                     teachers.map(teacher => <div key={teacher._id} className="shadow-2xl p-5 text-center space-y-1 rounded-2xl ">
                         <img className="w-[150px] mb-3 border-2 h-[150px] mx-auto rounded-full" src={teacher.photo} alt="" />
-                        <h1 className="text-xl font-bold">{teacher.name}</h1>
-                        <p className="text-slate-600 font-medium">Subject: <span className="font-bold text-black">{teacher.subject}</span></p>
+                        <h1 className="text-lg font-bold">{teacher.name}</h1>
+                        <p className="text-slate-600 font-medium">{teacher.subject}</p>
                         <p className="text-slate-600 font-medium">Phone:  <span className="font-bold text-black">{teacher.number}</span></p>
                     </div>)
                 }
