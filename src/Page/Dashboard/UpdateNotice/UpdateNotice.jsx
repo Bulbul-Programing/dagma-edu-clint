@@ -64,7 +64,7 @@ const UpdateNotice = () => {
         const title = form.title.value
         const UpdateDate = moment().format('l')
         const photo = updatedPhoto
-        const status = 'update'
+        const status = 'pending'
 
         const updateNoticeData = { title, UpdateDate, status, photo: updatedPhoto, date: noticeInfo.date, email: noticeInfo.email }
 

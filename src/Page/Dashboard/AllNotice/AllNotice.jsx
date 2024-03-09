@@ -43,18 +43,18 @@ const AllNotice = () => {
                 'content-type': 'multipart/form-data'
             }
         },)
-        .then()
-        .catch(error => {
-            setError('Please try to another Photo')
-            setLoading(false)
-        })
+            .then()
+            .catch(error => {
+                setError('Please try to another Photo')
+                setLoading(false)
+            })
         const imageURL = res.data.data.display_url
 
         const title = data.noticeTitle
         const date = moment().format('l')
         const photo = imageURL
         const email = user.email
-        const noticeData = { title, date, photo, email, status:'pending'}
+        const noticeData = { title, date, photo, email, status: 'pending' }
         axiosSecure.post('/add/notice', noticeData)
             .then(res => {
                 if (res.data.insertedId) {
@@ -115,6 +115,29 @@ const AllNotice = () => {
         });
     }
 
+    const handleNoticeStatus = async (id, status) => {
+        const updateStatus = { status: status }
+        if (status === 'pending') {
+            updateStatus.status = 'active'
+        }
+        else {
+            updateStatus.status = 'pending'
+        }
+
+        await axiosSecure.put(`/notice/status/update?id=${id}`, updateStatus)
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Notice delete successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    refetch()
+                }
+            })
+    }
 
     if (isLoading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
@@ -140,7 +163,7 @@ const AllNotice = () => {
                         </form>
                         <div className="modal-action ">
                             <form method="dialog" className="w-full">
-                                <button onClick={()=>setLoading(false)} className="btn w-full text-white bg-red-500">Cancel</button>
+                                <button onClick={() => setLoading(false)} className="btn w-full text-white bg-red-500">Cancel</button>
                             </form>
                         </div>
                     </div>
@@ -155,6 +178,7 @@ const AllNotice = () => {
                             </th>
                             <th>Date</th>
                             <th>Title</th>
+                            <th>Status</th>
                             <th className="text-center">Action</th>
                         </tr>
                     </thead>
@@ -169,15 +193,18 @@ const AllNotice = () => {
                                     <td className="w-[50px]">
                                         <h1 className="font-bold">{notice.date}</h1>
                                     </td>
-                                    <td className="min-w-[600px]">
+                                    <td className="min-w-[400px]">
                                         <div className="flex items-center gap-x-5">
                                             <h1 className="font-bold">{notice.title.length > 55 ? notice.title.slice(0, 55) : notice.title}{notice.title.length > 55 ? '....' : ''}</h1>
                                             {
                                                 notice.UpdateDate ? <div>
-                                                <p className="bg-slate-200 px-2 py-1 rounded-lg font-medium">{notice?.status} {notice?.UpdateDate}</p>
-                                            </div> : ''
+                                                    <p className="bg-slate-200 px-2 py-1 rounded-lg font-medium">{notice?.status} {notice?.UpdateDate}</p>
+                                                </div> : ''
                                             }
                                         </div>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleNoticeStatus(notice._id, notice.status)} className={`${notice.status === 'pending' ? 'bg-[#ffcc00]' : 'bg-blue-400'} text-white px-3 py-1 rounded-sm w-20`}>{notice.status}</button>
                                     </td>
 
                                     <th className="w-[300px]">

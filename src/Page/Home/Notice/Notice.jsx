@@ -16,7 +16,7 @@ const Notice = () => {
     if (isLoading) {
         return <div className="flex justify-center my-20"><span className="loading loading-dots loading-lg"></span></div>
     }
-    
+
     return (
         <div className="bg-slate-200 my-5 mx-5 md:mx-10 lg:mx-10 rounded-lg flex items-center ">
 
@@ -26,12 +26,17 @@ const Notice = () => {
                     <h3 className="font-bold text-lg mb-5">All Notice</h3>
                     <div>
                         {
-                            notices.map((notice, index) =>
-                                <a href={notice.photo} key={notice._id} className="hover:text-blue-400 transition" target="_blank">
-                                    <div  className="mr-10 mb-3 shadow-md px-2 py-3 rounded-lg">
-                                        <p>{index + 1}. {notice.title.length > 42 ? notice.title.slice(0,42) : notice.title}{notice.title.length > 42 ? '...' : ''}</p>
-                                    </div>
-                                </a>
+                            notices?.map((notice, index) =>
+                                <div key={notice._id}>
+                                    {
+                                        notice.status !== "pending" &&
+                                        <a href={notice.photo} className="hover:text-blue-400 transition" target="_blank">
+                                            <div className="mr-10 mb-3 shadow-md px-2 py-3 rounded-lg">
+                                                <p>{index + 1}. {notice.title.length > 42 ? notice.title.slice(0, 42) : notice.title}{notice.title.length > 42 ? '...' : ''}</p>
+                                            </div>
+                                        </a>
+                                    }
+                                </div>
                             )
                         }
                     </div>
@@ -42,11 +47,15 @@ const Notice = () => {
                     </div>
                 </div>
             </dialog >
-            <div className="overflow-hidden">
+            <div className="overflow-hidden w-full">
                 <Marquee pauseOnHover={true} className="">
                     {
-                        notices.map(notice =>
-                            <div key={notice._id} className="mr-10"><a href={notice.photo} className="hover:text-blue-400 transition" target="_blank"> | {notice.title} | </a></div>
+                        notices?.map(notice =>
+                            <div key={notice._id}>
+                                {
+                                    notice.status !== "pending" && <div className="mr-10"><a href={notice.photo} className="hover:text-blue-400 transition" target="_blank"> | {notice.title} | </a></div>
+                                }
+                            </div>
                         )
                     }
                 </Marquee>
