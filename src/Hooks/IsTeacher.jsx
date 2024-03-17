@@ -2,12 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Component/AuthProvider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import useAxiosPublic from "./useAxiosPublic";
 
 const IsTeacher = ({children}) => {
     const { user, loading } = useContext(AuthContext)
-    const navigate = useNavigate()
     const [load, setLoad] = useState(false)
     const axiosSecure = useAxiosSecure()
     const axiosPublic = useAxiosPublic()
@@ -23,7 +22,7 @@ const IsTeacher = ({children}) => {
                 })
         }
         checkAdmin()
-    }, [user])
+    }, [])
 
 
     if (load || loading) {
@@ -34,7 +33,8 @@ const IsTeacher = ({children}) => {
         return children
     }
     else {
-        navigate('/')
+        <Navigate to='/'></Navigate>
+
     }
 
 };
