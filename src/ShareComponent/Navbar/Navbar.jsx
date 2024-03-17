@@ -75,7 +75,7 @@ const Navbar = () => {
 
                 </div>
                 <div className="flex items-center">
-                    <img className="w-[70px] h-[70px]" src="https://i.ibb.co/QQrYXxB/35933-ai.png" alt="" />
+                    <img className="w-[70px] h-[70px]" src="https://i.ibb.co/31ZV2WH/416200583-777597704382658-5573574209946949939-n-removebg-preview-1.png" alt="" />
                     <h1 className="text-4xl font-bold">DAGMA</h1>
                 </div>
             </div>
