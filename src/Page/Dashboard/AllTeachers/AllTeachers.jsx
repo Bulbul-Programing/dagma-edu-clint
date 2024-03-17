@@ -14,8 +14,9 @@ const AllTeachers = ({ teacherRole }) => {
     const imageHosting = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+
     const { data: teachers, isLoading, refetch } = useQuery({
-        queryKey: ['dashboardTeachers'],
+        queryKey: ['getTeachersForAddingTeacher'],
         queryFn: async () => {
             const response = await axiosSecure.get('/allTeachers')
             return response.data
@@ -179,7 +180,7 @@ const AllTeachers = ({ teacherRole }) => {
                     </thead>
                     <tbody>
                         {
-                            teachers?.map((teacher, index) =>
+                            teachers.map((teacher, index) =>
                                 <tr key={teacher._id}>
                                     <th className="min-w-[50px]">
                                         <h1 className="text-lg">{index + 1}</h1>

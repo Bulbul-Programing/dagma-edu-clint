@@ -23,6 +23,14 @@ const AddResult = () => {
         }
     })
 
+    const { data: teachers, isLoading: teacherDataLoading, refetch: reload } = useQuery({
+        queryKey: ['getTeachersForAddResult'],
+        queryFn: async () => {
+            const response = await axiosSecure.get(`/getTeacher/role/${user.email}`)
+            return response.data
+        }
+    })
+    console.log(teachers);
     const handleSubmit = async (e) => {
         e.preventDefault()
         const form = e.target
@@ -103,7 +111,7 @@ const AddResult = () => {
         });
     }
 
-    if (isLoading) {
+    if (isLoading || teacherDataLoading) {
         <div className="flex justify-center my-20"><span className="loading loading-dots loading-lg"></span></div>
     }
 
@@ -183,7 +191,9 @@ const AddResult = () => {
                                     <th className="">
                                         <span className="flex justify-center">
                                             <Link to={`/dashboard/update/result/${result._id}`} reloadData={'refetch'}><button className="btn bg-blue-500 mr-3 text-white hover:text-black">Update</button></Link>
-                                            <button onClick={() => handleDelete(result._id)} className="btn bg-red-500 text-white hover:text-black">Delete</button>
+                                            {
+                                                teachers.teacherRole === 'Admin' && <button onClick={() => handleDelete(result._id)} className="btn bg-red-500 text-white hover:text-black">Delete</button>
+                                            }
                                         </span>
                                     </th>
                                 </tr>)

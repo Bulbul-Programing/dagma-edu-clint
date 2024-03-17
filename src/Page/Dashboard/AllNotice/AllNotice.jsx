@@ -27,6 +27,14 @@ const AllNotice = () => {
         }
     })
 
+    const { data: teachers, isLoading: teacherDataLoading, refetch: reload } = useQuery({
+        queryKey: ['getTeachersFotAddNotice'],
+        queryFn: async () => {
+            const response = await axiosSecure.get(`/getTeacher/role/${user.email}`)
+            return response.data
+        }
+    })
+
     const {
         register,
         handleSubmit,
@@ -139,7 +147,7 @@ const AllNotice = () => {
             })
     }
 
-    if (isLoading) {
+    if (isLoading || teacherDataLoading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
     return (
@@ -178,7 +186,9 @@ const AllNotice = () => {
                             </th>
                             <th>Date</th>
                             <th>Title</th>
-                            <th>Status</th>
+                            {
+                                teachers.teacherRole === 'Admin' && <th>Status</th>
+                            }
                             <th className="text-center">Action</th>
                         </tr>
                     </thead>
@@ -203,14 +213,19 @@ const AllNotice = () => {
                                             }
                                         </div>
                                     </td>
-                                    <td>
-                                        <button onClick={() => handleNoticeStatus(notice._id, notice.status)} className={`${notice.status === 'pending' ? 'bg-[#ffcc00]' : 'bg-blue-400'} text-white px-3 py-1 rounded-sm w-20`}>{notice.status}</button>
-                                    </td>
+                                    {
+                                        teachers.teacherRole === 'Admin' && 
+                                        <td>
+                                            <button onClick={() => handleNoticeStatus(notice._id, notice.status)} className={`${notice.status === 'pending' ? 'bg-[#ffcc00]' : 'bg-blue-400'} text-white px-3 py-1 rounded-sm w-20`}>{notice.status}</button>
+                                        </td>
+                                    }
 
                                     <th className="w-[300px]">
                                         <div className="flex justify-center">
                                             <Link to={`/dashboard/update/notice/${notice._id}`}><button className="btn bg-blue-500 mr-3 text-white hover:text-black">Update</button></Link>
-                                            <button onClick={() => handleDelete(notice._id)} className="btn bg-red-500 text-white hover:text-black">Delete</button>
+                                            {
+                                                teachers.teacherRole === 'Admin' && <button onClick={() => handleDelete(notice._id)} className="btn bg-red-500 text-white hover:text-black">Delete</button>
+                                            }
                                         </div>
                                     </th>
                                 </tr>)
