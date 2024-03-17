@@ -8,7 +8,6 @@ import { Navigate } from "react-router-dom";
 const isAdmin = ({ children }) => {
     const { user, loading } = useContext(AuthContext)
     const [load, setLoad] = useState(false)
-    const axiosSecure = useAxiosSecure()
     const axiosPublic = useAxiosPublic()
     const [userInfo, setUserInfo] = useState({})
     
