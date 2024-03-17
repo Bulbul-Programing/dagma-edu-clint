@@ -122,7 +122,7 @@ const AllTeachers = ({ teacherRole }) => {
                 }
             })
     }
-    console.log(teachers);
+
     if (isLoading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }

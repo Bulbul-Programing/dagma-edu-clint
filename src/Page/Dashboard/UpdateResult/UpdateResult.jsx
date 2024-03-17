@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 import { AuthContext } from '../../../Component/AuthProvider/AuthProvider';
 
-const UpdateResult = (reloadData) => {
+const UpdateResult = () => {
     const { id } = useParams()
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure()
@@ -21,8 +21,6 @@ const UpdateResult = (reloadData) => {
     const result = useLoaderData()
     const [error, setError] = useState('')
     const { user } = useContext(AuthContext)
-
-    console.log(reloadData);
 
     useEffect(() => {
         if (profile?.length > 0) {

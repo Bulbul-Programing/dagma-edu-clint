@@ -19,7 +19,7 @@ const Banner = () => {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
     return (
-        <div className='m-5 md:m-10 lg:m-10'>
+        <div className='m-5 md:m-10 lg:m-10 lg:mx-20'>
             <Swiper
                 spaceBetween={30}
                 pagination={{
@@ -37,7 +37,7 @@ const Banner = () => {
                 {
                     memorys[0]?.image?.map((image, index) => <SwiperSlide key={index}>
                         <div className='flex justify-center'>
-                            <img className='h-[230px] rounded-xl md:h-[400px] lg:h-[600px] w-full' src={image} alt="" />
+                            <img className='h-[230px] rounded-xl md:h-[400px] lg:h-[500px] w-full' src={image} alt="" />
                         </div></SwiperSlide>)
                 }
             </Swiper>

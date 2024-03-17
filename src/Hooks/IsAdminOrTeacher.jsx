@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Component/AuthProvider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 import useAxiosPublic from "./useAxiosPublic";
 import { Navigate } from "react-router-dom";
+import { AuthContext } from "../Component/AuthProvider/AuthProvider";
 
-const isAdmin = ({ children }) => {
+const IsAdminOrTeacher = ({ children }) => {
     const { user, loading } = useContext(AuthContext)
     const [load, setLoad] = useState(false)
     const axiosPublic = useAxiosPublic()
@@ -23,12 +23,11 @@ const isAdmin = ({ children }) => {
         checkAdmin()
     }, [user])
     
-
     if (load || loading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
 
-    if (userInfo?.teacherRole === "Admin" || 'teacher') {
+    if (userInfo?.teacherRole === "Admin" || "teacher") {
         return children
     }
     else{
@@ -37,4 +36,4 @@ const isAdmin = ({ children }) => {
 
 };
 
-export default isAdmin;
+export default IsAdminOrTeacher;

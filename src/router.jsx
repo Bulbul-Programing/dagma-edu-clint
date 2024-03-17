@@ -18,7 +18,7 @@ import UpdateTeacher from "./Page/Dashboard/UpdateTeacher/UpdateTeacher";
 import Memory from "./Page/Dashboard/Memory/Memory";
 import UpdateNotice from "./Page/Dashboard/UpdateNotice/UpdateNotice";
 import Forum from "./Page/Forum/Forum";
-import IsAdmin from "./Hooks/isAdmin";
+import IsAdmin from "./Hooks/IsAdmin";
 import IsLogin from "./Hooks/isLogin";
 import MujibCorner from "./Page/MujibCorner/MujibCorner";
 import Corner from "./Page/Dashboard/Corner/Corner";
@@ -27,6 +27,7 @@ import UpdateResult from "./Page/Dashboard/UpdateResult/UpdateResult";
 import TeacherDBHome from "./Page/Dashboard/TeacherDashbord/TeacherDBHome/TeacherDBHome";
 import TeacherDashboard from "./Page/Dashboard/TeacherDashbord/TeacherDashboard";
 import IsTeacher from "./Hooks/IsTeacher";
+import IsAdminOrTeacher from "./Hooks/IsAdminOrTeacher";
 
 const router = createBrowserRouter([
   {
@@ -101,17 +102,17 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/update/teacher/:id',
-        element: <IsAdmin><UpdateTeacher></UpdateTeacher></IsAdmin>,
+        element: <IsAdminOrTeacher><UpdateTeacher></UpdateTeacher></IsAdminOrTeacher>,
         loader: ({ params }) => fetch(`http://localhost:5000/teacher/${params.id}`)
       },
       {
         path: '/dashboard/update/notice/:id',
-        element: <IsAdmin><UpdateNotice></UpdateNotice></IsAdmin>,
+        element: <IsAdminOrTeacher><UpdateNotice></UpdateNotice></IsAdminOrTeacher>,
         loader: ({ params }) => fetch(`http://localhost:5000/singleNotice/${params.id}`)
       },
       {
         path: '/dashboard/update/result/:id',
-        element: <IsAdmin><UpdateResult></UpdateResult></IsAdmin>,
+        element: <IsAdminOrTeacher><UpdateResult></UpdateResult></IsAdminOrTeacher>,
         loader: ({ params }) => fetch(`http://localhost:5000/single/result/${params.id}`)
       },
     ]

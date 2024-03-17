@@ -16,8 +16,6 @@ const TeacherDashboard = () => {
         }
     })
 
-    console.log(teacherInfo);
-
     return (
         <div className="flex">
             <div className=" h-svh px-5 space-y-5 pt-5 bg-blue-100 w-[200px] md:w-3/12 lg:w-2/12">

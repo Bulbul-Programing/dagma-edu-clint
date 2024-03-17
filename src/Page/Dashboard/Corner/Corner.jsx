@@ -105,23 +105,23 @@ const Corner = () => {
                         <h3 className="font-bold text-lg">Change Corner Title</h3>
                         <form onSubmit={handleSubmit} className="mt-5">
                             <input type="text" className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" name="title" placeholder="Change Title" id="" required />
-                            <span className="text-slate-500 px-1">Change Profile</span>
+                            <p className="text-slate-500 px-1">Change Profile</p>
                             <input type="file" className="file-input file-input-bordered w-full mb-2 mt-1" name="profile" placeholder="Change profile photo" id="" required />
-                            <span className="text-slate-500 px-1">Change Banner</span>
+                            <p className="text-slate-500 px-1">Change Banner</p>
                             <input type="file" className="file-input file-input-bordered w-full mb-2 mt-1" name="banner" placeholder="Change profile photo" id="" required />
-                            <span className="text-slate-500 px-1">Change Photos</span>
+                            <p className="text-slate-500 px-1">Change Photos</p>
                             <input type="file" onChange={handleFileChange} className="file-input file-input-bordered w-full mb-6 mt-1" name="photos" placeholder="Change all photos" id="" multiple required />
                             <input type="text" className="px-4 w-full mb-4 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" name="descriptionTitle" placeholder="Change Description title" id="" required />
                             <textarea name="description" className="px-4 w-full mb-6 outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" rows="3" placeholder="Description" required></textarea>
 
-                            <span className="modal-action mt-[-10px]">
+                            <p className="modal-action mt-[-10px]">
                                 {
-                                    loading ? <button className="btn btn-ghost" disabled><span className="loading loading-spinner loading-md"></span></button> : <input className='btn bg-blue-500 text-white hover:text-black' type="submit" value="Update Corner" />
+                                    loading ? <button className="btn btn-ghost" disabled><p className="loading loading-spinner loading-md"></p></button> : <input className='btn bg-blue-500 text-white hover:text-black' type="submit" value="Update Corner" />
                                 }
                                 <form method="dialog">
                                     <button className="btn bg-red-500 text-white hover:text-black ml-3">Close</button>
                                 </form>
-                            </span>
+                            </p>
                         </form>
 
                     </div>

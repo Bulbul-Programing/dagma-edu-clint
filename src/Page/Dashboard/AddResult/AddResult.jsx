@@ -22,6 +22,7 @@ const AddResult = () => {
             return res.data
         }
     })
+    console.log(allResult);
 
     const { data: teachers, isLoading: teacherDataLoading, refetch: reload } = useQuery({
         queryKey: ['getTeachersForAddResult'],
@@ -30,7 +31,7 @@ const AddResult = () => {
             return response.data
         }
     })
-    console.log(teachers);
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
         const form = e.target
@@ -190,7 +191,7 @@ const AddResult = () => {
 
                                     <th className="">
                                         <span className="flex justify-center">
-                                            <Link to={`/dashboard/update/result/${result._id}`} reloadData={'refetch'}><button className="btn bg-blue-500 mr-3 text-white hover:text-black">Update</button></Link>
+                                            <Link to={`/dashboard/update/result/${result._id}`}><button className="btn bg-blue-500 mr-3 text-white hover:text-black">Update</button></Link>
                                             {
                                                 teachers?.teacherRole === 'Admin' && <button onClick={() => handleDelete(result._id)} className="btn bg-red-500 text-white hover:text-black">Delete</button>
                                             }
