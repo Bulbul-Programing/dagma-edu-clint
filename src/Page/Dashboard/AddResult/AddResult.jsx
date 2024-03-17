@@ -192,7 +192,7 @@ const AddResult = () => {
                                         <span className="flex justify-center">
                                             <Link to={`/dashboard/update/result/${result._id}`} reloadData={'refetch'}><button className="btn bg-blue-500 mr-3 text-white hover:text-black">Update</button></Link>
                                             {
-                                                teachers.teacherRole === 'Admin' && <button onClick={() => handleDelete(result._id)} className="btn bg-red-500 text-white hover:text-black">Delete</button>
+                                                teachers?.teacherRole === 'Admin' && <button onClick={() => handleDelete(result._id)} className="btn bg-red-500 text-white hover:text-black">Delete</button>
                                             }
                                         </span>
                                     </th>
