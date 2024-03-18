@@ -38,7 +38,7 @@ const StudentResult = () => {
                         initial={{
                             opacity: 0,
                             // if odd index card,slide from right instead of left
-                            x: -50
+                            y: -50
                         }}
                         whileInView={{
                             opacity: 1,
@@ -60,7 +60,7 @@ const StudentResult = () => {
                         initial={{
                             opacity: 0,
                             // if odd index card,slide from right instead of left
-                            x: 50
+                            y: -50
                         }}
                         whileInView={{
                             opacity: 1,

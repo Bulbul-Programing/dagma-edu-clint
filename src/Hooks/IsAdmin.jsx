@@ -21,7 +21,7 @@ const isAdmin = ({ children }) => {
                 })
         }
         checkAdmin()
-    }, [user])
+    }, [])
     
 
     if (load || loading) {

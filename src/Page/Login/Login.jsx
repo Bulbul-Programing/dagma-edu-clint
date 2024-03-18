@@ -58,7 +58,7 @@ const Login = () => {
             <div className="w-full md:w-1/2 lg:w-1/2 hidden md:block lg:block">
                 <img src="https://i.ibb.co/6bL83HL/20547283-6310507.jpg" alt="" />
             </div>
-            <div className="md:w-[370px] bg-[url('https://i.ibb.co/VVgHWbb/New-Project-8.jpg')] lg:w-[450px] shadow-2xl p-5 md:p-5 lg:p-10 rounded-3xl bg-cover bg-opacity-10 bg-[url('https://i.ibb.co/6bL83HL/20547283-6310507.jpg') md:bg-none lg:bg-none]">
+            <div className="md:w-[370px] lg:w-[450px] shadow-2xl p-5 md:p-5 lg:p-10 rounded-3xl bg-cover bg-opacity-10 ">
                 <h1 className="text-3xl font-bold text-center">Please Login</h1>
                 <form onSubmit={handleLogin}>
                     <div className="form-control">

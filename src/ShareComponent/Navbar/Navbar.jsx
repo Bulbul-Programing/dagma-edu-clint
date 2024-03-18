@@ -75,8 +75,8 @@ const Navbar = () => {
 
                 </div>
                 <div className="flex items-center">
-                    <img className="w-[70px] h-[70px]" src="https://i.ibb.co/31ZV2WH/416200583-777597704382658-5573574209946949939-n-removebg-preview-1.png" alt="" />
-                    <h1 className="text-4xl font-bold">DAGMA</h1>
+                    <img className="w-[50px] md:w-[70px] lg:w-[70px] h-[50px] md:h-[70px] lg:h-[70px]" src="https://i.ibb.co/31ZV2WH/416200583-777597704382658-5573574209946949939-n-removebg-preview-1.png" alt="" />
+                    <h1 className="text-xl md:text4-xl lg:text-4xl font-bold">DAGMA</h1>
                 </div>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -97,7 +97,7 @@ const Navbar = () => {
                         </div> : ''
                     }
                 </div>
-                <div className="ml-3 hidden md:block lg:block">
+                <div className="ml-3 ">
                     {
                         user ? <button onClick={handleLogOut} className="btn bg-blue-500 text-white font-bold hover:text-black">Log out</button> : <Link to='/login'><button className="btn bg-blue-500 text-white font-bold hover:text-black">Login</button></Link>
                     }
