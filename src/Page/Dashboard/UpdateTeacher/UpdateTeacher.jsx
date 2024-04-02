@@ -90,14 +90,14 @@ const UpdateTeacher = () => {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
     return (
-        <div className='my-10'>
+        <div className='my-10 mx-2 md:mx-10 lg:mx-20'>
             <h1 className='text-3xl font-bold text-center'>Update Data About {loaderTeacherData?.name}</h1>
-            <div className='w-1/2 mx-auto my-10'>
+            <div className='w-full md:w-3/4 lg:w-1/2 mx-auto my-10'>
                 {
-                    loading ? <div className="skeleton w-[300px] h-[400px] mx-auto"></div> : <img className='w-[300px] mx-auto rounded-3xl' src={updatedPhoto} alt="" />
+                    loading ? <div className="skeleton w-[300px] h-[200px] mx-auto"></div> : <img className='w-[300px] mx-auto rounded-3xl' src={updatedPhoto} alt="" />
                 }
                 {
-                    loading ? '' : updatedPhoto ? '' : <img className='w-[300px] mx-auto rounded-3xl' src={teachersInfo.photo} alt="" />
+                    loading ? '' : updatedPhoto ? '' : <img className='w-[300px] h-[300px] mx-auto rounded-3xl' src={teachersInfo.photo} alt="" />
                 }
                 <p className="text-red-500 font-medium mb-4">{error}</p>
                 <input onChange={handleProfile} id="actual-btn" hidden className="px-4 w-full  outline-none py-3 border-2 focus:border-blue-400 rounded-lg text-slate-500" type="file" /> <br />

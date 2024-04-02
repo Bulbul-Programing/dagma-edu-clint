@@ -81,9 +81,9 @@ const UpdateResult = () => {
             .catch(error => console.log(error))
     }
     return (
-        <div className='my-10'>
+        <div className='my-10 mx-2'>
             <h1 className='text-xl font-bold text-center'>Update {result.title}</h1>
-            <div className='w-1/2 mx-auto my-10'>
+            <div className='w-full md:w-3/4 lg:w-1/2 mx-auto my-10'>
                 {
                     loading ? <div className="skeleton w-[300px] h-[400px] mx-auto"></div> : <img className='w-[300px] mx-auto rounded-3xl' src={updatedPhoto} alt="" />
                 }
