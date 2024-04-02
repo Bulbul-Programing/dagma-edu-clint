@@ -94,10 +94,9 @@ const Results = () => {
                                         <h1 className="font-bold text-center">{result.failed}</h1>
                                     </td>
 
-                                    <th className="max-w-[140px] p-0">
+                                    <th className="min-w-[210px] p-0">
                                         <span className="flex justify-center">
-
-                                            <button onClick={() => handleModal(index)} className="px-3 py-2 rounded-md text-xs hover:bg-slate-300 bg-blue-500 mr-3 text-white hover:text-black">Chart View</button>
+                                            <button onClick={() => handleModal(index)} className="px-2 md:px-3 lg:px-3 py-2 rounded-md text-xs hover:bg-slate-300 bg-blue-500 mr-3 text-white hover:text-black">Chart View</button>
                                             {
                                                 result.resultPic && <div className="px-3 py-2 rounded-md text-xs hover:bg-slate-300 bg-blue-500 mr-3 text-white hover:text-black"><a href={result.resultPic} target="_blank">download</a></div>
                                             }
