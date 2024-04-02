@@ -75,7 +75,7 @@ const StudentResult = () => {
                             <h1 className='text-center text-2xl font-bold'>{ allResult ? allResult[0]?.title : 'loading...'}</h1>
                             <p className='text-center font-medium'>Total participant <span className='text-xl'>{ allResult ? allResult[0]?.participant : 'loading...'}</span></p>
                         </div>
-                        <PieChart width={400} height={310}>
+                        <PieChart width={390} height={310}>
                             <Pie
                                 data={data}
                                 cx={200}
