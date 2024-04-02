@@ -103,17 +103,17 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/update/teacher/:id',
         element: <IsAdminOrTeacher><UpdateTeacher></UpdateTeacher></IsAdminOrTeacher>,
-        loader: ({ params }) => fetch(`http://localhost:5000/teacher/${params.id}`)
+        loader: ({ params }) => fetch(`https://dagma-edu-server.vercel.app/teacher/${params.id}`)
       },
       {
         path: '/dashboard/update/notice/:id',
         element: <IsAdminOrTeacher><UpdateNotice></UpdateNotice></IsAdminOrTeacher>,
-        loader: ({ params }) => fetch(`http://localhost:5000/singleNotice/${params.id}`)
+        loader: ({ params }) => fetch(`https://dagma-edu-server.vercel.app/singleNotice/${params.id}`)
       },
       {
         path: '/dashboard/update/result/:id',
         element: <IsAdminOrTeacher><UpdateResult></UpdateResult></IsAdminOrTeacher>,
-        loader: ({ params }) => fetch(`http://localhost:5000/single/result/${params.id}`)
+        loader: ({ params }) => fetch(`https://dagma-edu-server.vercel.app/single/result/${params.id}`)
       },
     ]
   },
