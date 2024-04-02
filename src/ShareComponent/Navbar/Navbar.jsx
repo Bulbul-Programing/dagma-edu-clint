@@ -5,19 +5,40 @@ import { AuthContext } from "../../Component/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const Navbar = () => {
     const { user, loading, logOut, emailLogin } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const [teacherInfo, setTeacherInfo] = useState({})
-    
-    useEffect(()=>{
+    const [cornerName, setCornerName] = useState([])
+    const [dataLoading, setDataLoading] = useState(false)
+
+    useEffect(() => {
         axiosSecure.get(`/getTeacher/role/${user?.email}`)
-        .then(res=> setTeacherInfo(res.data))
-    },[user])
+            .then(res => setTeacherInfo(res.data))
+    }, [user])
+
+    useEffect(() => {
+        const cornerName = async () => {
+            setDataLoading(true)
+            await axiosPublic.get('/get/corner/data')
+                .then(res => {
+                    setCornerName(res.data)
+                    setDataLoading(false)
+                }
+                )
+                .catch(error => {
+                    console.log(error);
+                    setDataLoading(false)
+                })
+        }
+        cornerName()
+    }, [])
     
-    if (loading) {
+    if (loading || dataLoading) {
         return <div className="flex justify-center"><span className="loading loading-dots loading-lg"></span></div>
     }
 
@@ -31,7 +52,7 @@ const Navbar = () => {
         {
             teacherInfo?.teacherRole === 'teacher' && <NavLink className='mr-2 font-bold py-2 px-3' to='/teacherDB/home'>Dashboard</NavLink>
         }
-        <NavLink className='mr-2 font-bold py-2 px-3' to='/mujibCorner'>Mujib Corner</NavLink>
+        <NavLink className='mr-2 font-bold py-2 px-3' to='/mujibCorner'>{cornerName[0]?.title}</NavLink>
     </>
 
 
